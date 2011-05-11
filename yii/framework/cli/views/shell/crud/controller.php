@@ -15,7 +15,7 @@ class <?php echo $controllerClass; ?> extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/column1';
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
@@ -45,7 +45,7 @@ class <?php echo $controllerClass; ?> extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('novo','atualizar'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -72,7 +72,7 @@ class <?php echo $controllerClass; ?> extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionNovo()
 	{
 		$model=new <?php echo $modelClass; ?>;
 
@@ -86,7 +86,7 @@ class <?php echo $controllerClass; ?> extends Controller
 				$this->redirect(array('view','id'=>$model-><?php echo $ID; ?>));
 		}
 
-		$this->render('create',array(
+		$this->render('novo',array(
 			'model'=>$model,
 		));
 	}
