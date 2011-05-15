@@ -61,11 +61,11 @@ class CButtonColumn extends CGridColumn
 	 * <code>$row</code> the row number (zero-based); <code>$data</code> the data model for the row;
 	 * and <code>$this</code> the column object.
 	 */
-	public $viewButtonUrl='Yii::app()->controller->createUrl("view",array("id"=>$data->primaryKey))';
+	public $viewButtonUrl='Yii::app()->controller->createUrl("visualizar",array("id"=>$data->primaryKey))';
 	/**
 	 * @var array the HTML options for the view button tag.
 	 */
-	public $viewButtonOptions=array('class'=>'view');
+	public $viewButtonOptions=array('class'=>'visualizar');
 
 	/**
 	 * @var string the label for the update button. Defaults to "Update".
@@ -83,11 +83,11 @@ class CButtonColumn extends CGridColumn
 	 * <code>$row</code> the row number (zero-based); <code>$data</code> the data model for the row;
 	 * and <code>$this</code> the column object.
 	 */
-	public $updateButtonUrl='Yii::app()->controller->createUrl("update",array("id"=>$data->primaryKey))';
+	public $updateButtonUrl='Yii::app()->controller->createUrl("atualizar",array("id"=>$data->primaryKey))';
 	/**
 	 * @var array the HTML options for the update button tag.
 	 */
-	public $updateButtonOptions=array('class'=>'update');
+	public $updateButtonOptions=array('class'=>'atualizar');
 
 	/**
 	 * @var string the label for the delete button. Defaults to "Delete".
@@ -187,9 +187,9 @@ class CButtonColumn extends CGridColumn
 	protected function initDefaultButtons()
 	{
 		if($this->viewButtonLabel===null)
-			$this->viewButtonLabel=Yii::t('zii','View');
+			$this->viewButtonLabel=Yii::t('zii','Visualizar');
 		if($this->updateButtonLabel===null)
-			$this->updateButtonLabel=Yii::t('zii','Update');
+			$this->updateButtonLabel=Yii::t('zii','Atualizar');
 		if($this->deleteButtonLabel===null)
 			$this->deleteButtonLabel=Yii::t('zii','Delete');
 		if($this->viewButtonImageUrl===null)
@@ -199,7 +199,7 @@ class CButtonColumn extends CGridColumn
 		if($this->deleteButtonImageUrl===null)
 			$this->deleteButtonImageUrl=$this->grid->baseScriptUrl.'/delete.png';
 		if($this->deleteConfirmation===null)
-			$this->deleteConfirmation=Yii::t('zii','Are you sure you want to delete this item?');
+			$this->deleteConfirmation=Yii::t('zii','Você deseja realmente excluir este registro?');
 
 		foreach(array('view','update','delete') as $id)
 		{

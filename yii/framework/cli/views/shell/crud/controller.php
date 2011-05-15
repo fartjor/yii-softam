@@ -41,7 +41,7 @@ class <?php echo $controllerClass; ?> extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','visualizar','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -49,7 +49,7 @@ class <?php echo $controllerClass; ?> extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('gerenciar','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -61,9 +61,9 @@ class <?php echo $controllerClass; ?> extends Controller
 	/**
 	 * Displays a particular model.
 	 */
-	public function actionView()
+	public function actionVisualizar()
 	{
-		$this->render('view',array(
+		$this->render('visualizar',array(
 			'model'=>$this->loadModel(),
 		));
 	}
@@ -95,7 +95,7 @@ class <?php echo $controllerClass; ?> extends Controller
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionUpdate()
+	public function actionAtualizar()
 	{
 		$model=$this->loadModel();
 
@@ -109,7 +109,7 @@ class <?php echo $controllerClass; ?> extends Controller
 				$this->redirect(array('view','id'=>$model-><?php echo $ID; ?>));
 		}
 
-		$this->render('update',array(
+		$this->render('atualizar',array(
 			'model'=>$model,
 		));
 	}
@@ -138,23 +138,20 @@ class <?php echo $controllerClass; ?> extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('<?php echo $modelClass; ?>');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$this->redirect(array('gerenciar'));
 	}
 
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	public function actionGerenciar()
 	{
 		$model=new <?php echo $modelClass; ?>('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['<?php echo $modelClass; ?>']))
 			$model->attributes=$_GET['<?php echo $modelClass; ?>'];
 
-		$this->render('admin',array(
+		$this->render('gerenciar',array(
 			'model'=>$model,
 		));
 	}

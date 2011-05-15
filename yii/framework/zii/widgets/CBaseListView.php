@@ -169,7 +169,7 @@ abstract class CBaseListView extends CWidget
 	 */
 	public function renderEmptyText()
 	{
-		$emptyText=$this->emptyText===null ? Yii::t('zii','No results found.') : $this->emptyText;
+		$emptyText=$this->emptyText===null ? Yii::t('zii','Sem registros.') : $this->emptyText;
 		echo CHtml::tag('span', array('class'=>'empty'), $emptyText);
 	}
 
@@ -200,7 +200,7 @@ abstract class CBaseListView extends CWidget
 		if($this->enablePagination)
 		{
 			if(($summaryText=$this->summaryText)===null)
-				$summaryText=Yii::t('zii','Displaying {start}-{end} of {count} result(s).');
+				$summaryText=Yii::t('zii','Visualizando {start}-{end} de {count} registro(s).');
 			$pagination=$this->dataProvider->getPagination();
 			$total=$this->dataProvider->getTotalItemCount();
 			$start=$pagination->currentPage*$pagination->pageSize+1;
