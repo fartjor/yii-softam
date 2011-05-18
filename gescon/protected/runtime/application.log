@@ -1,0 +1,12 @@
+2011/05/18 03:56:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/novo.jpg".' in C:\wamp\www\yii\framework\web\CWebApplication.php:332
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(121): CWebApplication->runController('images/novo.jpg')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(155): CWebApplication->processRequest()
+#2 C:\wamp\www\gescon\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/gescon/images/novo.jpg
+2011/05/18 03:56:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/pesquisar.jpg".' in C:\wamp\www\yii\framework\web\CWebApplication.php:332
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(121): CWebApplication->runController('images/pesquisa...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(155): CWebApplication->processRequest()
+#2 C:\wamp\www\gescon\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/gescon/images/pesquisar.jpg
