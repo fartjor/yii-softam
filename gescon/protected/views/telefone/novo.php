@@ -8,4 +8,4 @@ $this->breadcrumbs=array(
 
 <h1>Novo Telefone</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('/telefone/_form', array('model'=>$model)); ?>
