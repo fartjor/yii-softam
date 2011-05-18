@@ -56,7 +56,25 @@
 		<?php echo $form->textField($model,'tel_id'); ?>
 		<?php echo $form->error($model,'tel_id'); ?>
 	</div>
+	<?php 
+	$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+    'id'=>'mydialog',
+    // additional javascript options for the dialog plugin
+    'options'=>array(
+        'title'=>'Dialog box 1',
+        'autoOpen'=>false,
+    ),
+));
 
+    echo $this->renderPartial('/telefone/novo', array('model'=>Telefone::model()));
+
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+
+// the link that may open the dialog
+echo CHtml::link('open dialog', '#', array(
+   'onclick'=>'$("#mydialog").dialog("open"); return false;',
+));
+?>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar' : 'Salvar'); ?>
 	</div>
