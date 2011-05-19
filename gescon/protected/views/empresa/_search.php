@@ -11,11 +11,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'end_id'); ?>
-		<?php echo $form->textField($model,'end_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'emp_nome'); ?>
 		<?php echo $form->textField($model,'emp_nome',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
@@ -46,8 +41,33 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'tel_id'); ?>
-		<?php echo $form->textField($model,'tel_id'); ?>
+		<?php echo $form->label($model,'emp_fone1'); ?>
+		<?php echo $form->textField($model,'emp_fone1',array('size'=>13,'maxlength'=>13)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'emp_fone2'); ?>
+		<?php echo $form->textField($model,'emp_fone2',array('size'=>13,'maxlength'=>13)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'emp_uf'); ?>
+		<?php echo $form->textField($model,'emp_uf',array('size'=>2,'maxlength'=>2)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'emp_cidade'); ?>
+		<?php echo $form->textField($model,'emp_cidade',array('size'=>60,'maxlength'=>60)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'emp_endereco'); ?>
+		<?php echo $form->textField($model,'emp_endereco',array('size'=>60,'maxlength'=>200)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'emp_cep'); ?>
+		<?php echo $form->textField($model,'emp_cep',array('size'=>9,'maxlength'=>9)); ?>
 	</div>
 
 	<div class="row buttons">

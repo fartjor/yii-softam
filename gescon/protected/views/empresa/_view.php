@@ -4,10 +4,6 @@
 	<?php echo CHtml::link(CHtml::encode($data->emp_id), array('view', 'id'=>$data->emp_id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('end_id')); ?>:</b>
-	<?php echo CHtml::encode($data->end_id); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('emp_nome')); ?>:</b>
 	<?php echo CHtml::encode($data->emp_nome); ?>
 	<br />
@@ -28,13 +24,33 @@
 	<?php echo CHtml::encode($data->emp_email); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('emp_cpf_socio_majoritario')); ?>:</b>
 	<?php echo CHtml::encode($data->emp_cpf_socio_majoritario); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('tel_id')); ?>:</b>
-	<?php echo CHtml::encode($data->tel_id); ?>
+	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('emp_fone1')); ?>:</b>
+	<?php echo CHtml::encode($data->emp_fone1); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('emp_fone2')); ?>:</b>
+	<?php echo CHtml::encode($data->emp_fone2); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('emp_uf')); ?>:</b>
+	<?php echo CHtml::encode($data->emp_uf); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('emp_cidade')); ?>:</b>
+	<?php echo CHtml::encode($data->emp_cidade); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('emp_endereco')); ?>:</b>
+	<?php echo CHtml::encode($data->emp_endereco); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('emp_cep')); ?>:</b>
+	<?php echo CHtml::encode($data->emp_cep); ?>
 	<br />
 
 	*/ ?>

@@ -38,15 +38,19 @@ or <b>=</b>) para otimizar suas pesquisas.
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
 		'emp_id',
-		'end_id',
 		'emp_nome',
 		'emp_cnpj',
 		'emp_data_ingresso',
 		'emp_site',
-		/*
 		'emp_email',
+		/*
 		'emp_cpf_socio_majoritario',
-		'tel_id',
+		'emp_fone1',
+		'emp_fone2',
+		'emp_uf',
+		'emp_cidade',
+		'emp_endereco',
+		'emp_cep',
 		*/
 		array(
 			'class'=>'CButtonColumn',
