@@ -43,6 +43,7 @@ div.form textarea,
 div.form select
 {
 	margin: 0.2em 0 0.5em 0;
+	
 }
 
 div.form fieldset
@@ -57,7 +58,8 @@ div.form label
 {
 	font-weight: bold;
 	font-size: 0.9em;
-	display: block;
+	float: left;
+	width: 120px;
 }
 
 div.form .row
@@ -151,6 +153,11 @@ div.wide.form label
 div.wide.form .row
 {
 	clear: left;
+}
+
+.buttons{
+	float : right;
+	padding-right: 417px;
 }
 
 div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage

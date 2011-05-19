@@ -5,78 +5,89 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Campos com <span class="required">*</span> s„o obrigatÛrios.</p>
+	<p class="note">Campos com <span class="required">*</span> s√£o obrigat√≥rios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'end_id'); ?>
-		<?php echo $form->textField($model,'end_id'); ?>
-		<?php echo $form->error($model,'end_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'emp_nome'); ?>
-		<?php echo $form->textField($model,'emp_nome',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'emp_nome',array('size'=>45,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'emp_nome'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'emp_cnpj'); ?>
-		<?php echo $form->textField($model,'emp_cnpj',array('size'=>14,'maxlength'=>14)); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_cnpj', 
+							'mask' => '99.999.999/9999-99', 'htmlOptions' => array('size' => 14)));?>
 		<?php echo $form->error($model,'emp_cnpj'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'emp_data_ingresso'); ?>
-		<?php echo $form->textField($model,'emp_data_ingresso'); ?>
-		<?php echo $form->error($model,'emp_data_ingresso'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'emp_site'); ?>
-		<?php echo $form->textField($model,'emp_site',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'emp_site',array('size'=>45,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'emp_site'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'emp_email'); ?>
-		<?php echo $form->textField($model,'emp_email',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'emp_email',array('size'=>45,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'emp_email'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'emp_cpf_socio_majoritario'); ?>
-		<?php echo $form->textField($model,'emp_cpf_socio_majoritario',array('size'=>11,'maxlength'=>11)); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_cpf_socio_majoritario', 
+							'mask' => '999.999.999-99', 'htmlOptions' => array('size' => 14)));?>
 		<?php echo $form->error($model,'emp_cpf_socio_majoritario'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'tel_id'); ?>
-		<?php echo $form->textField($model,'tel_id'); ?>
-		<?php echo $form->error($model,'tel_id'); ?>
+		<?php echo $form->labelEx($model,'emp_fone1'); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_fone1', 
+							'mask' => '(99)9999-9999', 'htmlOptions' => array('size' => 13)));?>
+		<?php echo $form->error($model,'emp_fone1'); ?>
 	</div>
-	<?php 
-	$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
-    'id'=>'mydialog',
-    // additional javascript options for the dialog plugin
-    'options'=>array(
-        'title'=>'Dialog box 1',
-        'autoOpen'=>false,
-    ),
-));
 
-    echo $this->renderPartial('/telefone/novo', array('model'=>Telefone::model()));
+	<div class="row">
+		<?php echo $form->labelEx($model,'emp_fone2'); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_fone2', 
+							'mask' => '(99)9999-9999', 'htmlOptions' => array('size' => 13)));?>
+		<?php echo $form->error($model,'emp_fone2'); ?>
+	</div>
 
-$this->endWidget('zii.widgets.jui.CJuiDialog');
+	<div class="row">
+		<?php echo $form->labelEx($model,'emp_uf'); ?>
+		<?php echo $form->dropDownList($model,'emp_uf',array(
+					'AC'=>'AC','AL'=>'AL','AM'=>'AM','AP'=>'AP','BA'=>'BA',
+					'CE'=>'CE','DF'=>'DF','ES'=>'ES','GO'=>'GO','MA'=>'MA',
+					'MG'=>'MG','MS'=>'MS','MT'=>'MT','PA'=>'PA','PB'=>'PB',
+					'PE'=>'PE','PI'=>'PI','PR'=>'PR','RJ'=>'RJ','RN'=>'RN',
+					'RO'=>'RO','RR'=>'RR','RS'=>'RS','SC'=>'SC','SE'=>'SE',
+					'SP'=>'SP','TO'=>'TO')); ?>
+		<?php echo $form->error($model,'emp_uf'); ?>
+	</div>
 
-// the link that may open the dialog
-echo CHtml::link('open dialog', '#', array(
-   'onclick'=>'$("#mydialog").dialog("open"); return false;',
-));
-?>
+	<div class="row">
+		<?php echo $form->labelEx($model,'emp_cidade'); ?>
+		<?php echo $form->textField($model,'emp_cidade',array('size'=>45,'maxlength'=>60)); ?>
+		<?php echo $form->error($model,'emp_cidade'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'emp_endereco'); ?>
+		<?php echo $form->textField($model,'emp_endereco',array('size'=>45,'maxlength'=>200)); ?>
+		<?php echo $form->error($model,'emp_endereco'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'emp_cep'); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_cep', 
+							'mask' => '99999-999', 'htmlOptions' => array('size' => 9)));?>
+		<?php echo $form->error($model,'emp_cep'); ?>
+	</div>
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar' : 'Salvar'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar Empresa' : 'Salvar Empresa'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

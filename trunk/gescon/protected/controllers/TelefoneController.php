@@ -72,7 +72,9 @@ class TelefoneController extends Controller
 
 		if(isset($_POST['Telefone']))
 		{
-			$model->attributes=$_POST['Telefone'];
+			$model->tel_fone1 = $_POST['tel_fone1'];
+			$model->tel_fone2 = $_POST['tel_fone2'];
+			$model->tel_fone3 = $_POST['tel_fone3'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->tel_id));
 		}

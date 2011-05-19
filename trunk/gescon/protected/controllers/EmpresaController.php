@@ -73,6 +73,8 @@ class EmpresaController extends Controller
 		if(isset($_POST['Empresa']))
 		{
 			$model->attributes=$_POST['Empresa'];
+			$model->emp_data_ingresso = date('Y-m-d');
+			$model->emp_cpf_socio_majoritario = $this->formatCPF($model->emp_cpf_socio_majoritario);
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->emp_id));
 		}
@@ -174,5 +176,10 @@ class EmpresaController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	protected function formatCPF($cpf){
+		$cpf = substr($cpf, 0, 3) . substr($cpf, 4, 3) . substr($cpf, 8, 3) . substr($cpf, 12, 2);
+		return $cpf;
 	}
 }
