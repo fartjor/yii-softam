@@ -55,7 +55,7 @@ class CRequiredValidator extends CValidator
 		}
 		else if($this->isEmpty($value,true))
 		{
-			$message=$this->message!==null?$this->message:Yii::t('yii','{attribute} cannot be blank.');
+			$message=$this->message!==null?$this->message:Yii::t('yii','{attribute} não pode ser nulo.');
 			$this->addError($object,$attribute,$message);
 		}
 	}
@@ -89,7 +89,7 @@ if(value!=" . CJSON::encode($this->requiredValue) . ") {
 		{
 			if($message===null)
 			{
-				$message=Yii::t('yii','{attribute} cannot be blank.');
+				$message=Yii::t('yii','{attribute} não pode ser nulo.');
 				$message=strtr($message, array(
 					'{attribute}'=>$object->getAttributeLabel($attribute),
 				));
