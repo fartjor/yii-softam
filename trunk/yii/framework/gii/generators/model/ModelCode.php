@@ -132,7 +132,7 @@ class ModelCode extends CCodeModel
 			if(($table=$this->getTableSchema($this->tableName))===null)
 				$this->addError('tableName',"Table '{$this->tableName}' does not exist.");
 			if($this->modelClass==='')
-				$this->addError('modelClass','Model Class cannot be blank.');
+				$this->addError('modelClass','Model Class não pode ser nulo.');
 
 			if(!$this->hasErrors($attribute) && ($invalidColumn=$this->checkColumns($table))!==null)
 					$invalidColumns[]=$invalidColumn;
