@@ -83,7 +83,7 @@ class <?php echo $controllerClass; ?> extends Controller
 		{
 			$model->attributes=$_POST['<?php echo $modelClass; ?>'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model-><?php echo $ID; ?>));
+				$this->redirect(array('visualizar','id'=>$model-><?php echo $ID; ?>));
 		}
 
 		$this->render('novo',array(
@@ -106,7 +106,7 @@ class <?php echo $controllerClass; ?> extends Controller
 		{
 			$model->attributes=$_POST['<?php echo $modelClass; ?>'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model-><?php echo $ID; ?>));
+				$this->redirect(array('visualizar','id'=>$model-><?php echo $ID; ?>));
 		}
 
 		$this->render('atualizar',array(
