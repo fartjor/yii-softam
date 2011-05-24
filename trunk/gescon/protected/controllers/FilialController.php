@@ -1,6 +1,6 @@
 <?php
 
-class EmpresaController extends Controller
+class FilialController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -65,18 +65,17 @@ class EmpresaController extends Controller
 	 */
 	public function actionNovo()
 	{
-		$model=new Empresa;
+		$model=new Filial;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Empresa']))
+		if(isset($_POST['Filial']))
 		{
-			$model->attributes=$_POST['Empresa'];
-			$model->emp_data_ingresso = date('Y-m-d');
-			$model->emp_cpf_socio_majoritario = $this->formatCPF($model->emp_cpf_socio_majoritario);
+			$model->attributes=$_POST['Filial'];
+			$model->fil_data_ingresso = date('Y-m-d');
 			if($model->save())
-				$this->redirect(array('visualizar','id'=>$model->emp_id));
+				$this->redirect(array('view','id'=>$model->fil_id));
 		}
 
 		$this->render('novo',array(
@@ -95,11 +94,11 @@ class EmpresaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Empresa']))
+		if(isset($_POST['Filial']))
 		{
-			$model->attributes=$_POST['Empresa'];
+			$model->attributes=$_POST['Filial'];
 			if($model->save())
-				$this->redirect(array('visualizar','id'=>$model->emp_id));
+				$this->redirect(array('view','id'=>$model->fil_id));
 		}
 
 		$this->render('atualizar',array(
@@ -139,10 +138,10 @@ class EmpresaController extends Controller
 	 */
 	public function actionGerenciar()
 	{
-		$model=new Empresa('search');
+		$model=new Filial('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Empresa']))
-			$model->attributes=$_GET['Empresa'];
+		if(isset($_GET['Filial']))
+			$model->attributes=$_GET['Filial'];
 
 		$this->render('gerenciar',array(
 			'model'=>$model,
@@ -158,7 +157,7 @@ class EmpresaController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Empresa::model()->findbyPk($_GET['id']);
+				$this->_model=Filial::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -171,15 +170,10 @@ class EmpresaController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='empresa-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='filial-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
-	}
-	
-	protected function formatCPF($cpf){
-		$cpf = substr($cpf, 0, 3) . substr($cpf, 4, 3) . substr($cpf, 8, 3) . substr($cpf, 12, 2);
-		return $cpf;
 	}
 }
