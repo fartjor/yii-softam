@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Filials'=>array('gerenciar'),
+	'Filiais'=>array('gerenciar'),
 	$model->fil_id=>array('visualizar','id'=>$model->fil_id),
 	'Atualizar',
 );

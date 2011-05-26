@@ -75,6 +75,7 @@ class EmpresaController extends Controller
 			$model->attributes=$_POST['Empresa'];
 			$model->emp_data_ingresso = date('Y-m-d');
 			$model->emp_cpf_socio_majoritario = $this->formatCPF($model->emp_cpf_socio_majoritario);
+			print_r($model->emp_cpf_socio_majoritario);
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->emp_id));
 		}

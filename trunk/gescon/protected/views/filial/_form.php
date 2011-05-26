@@ -47,7 +47,8 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fil_cpf_representante'); ?>
-		<?php echo $form->textField($model,'fil_cpf_representante',array('size'=>11,'maxlength'=>11)); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'fil_cpf_representante', 
+							'mask' => '999.999.999-99', 'htmlOptions' => array('size' => 14)));?>
 		<?php echo $form->error($model,'fil_cpf_representante'); ?>
 	</div>
 
@@ -64,32 +65,28 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'fil_data_modificacao'); ?>
-		<?php echo $form->textField($model,'fil_data_modificacao'); ?>
-		<?php echo $form->error($model,'fil_data_modificacao'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'fil_data_desligamento'); ?>
-		<?php echo $form->textField($model,'fil_data_desligamento'); ?>
-		<?php echo $form->error($model,'fil_data_desligamento'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'fil_fone1'); ?>
-		<?php echo $form->textField($model,'fil_fone1',array('size'=>13,'maxlength'=>13)); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'fil_fone1', 
+							'mask' => '(99)9999-9999', 'htmlOptions' => array('size' => 13)));?>
 		<?php echo $form->error($model,'fil_fone1'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fil_fone2'); ?>
-		<?php echo $form->textField($model,'fil_fone2',array('size'=>13,'maxlength'=>13)); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'fil_fone2', 
+							'mask' => '(99)9999-9999', 'htmlOptions' => array('size' => 13)));?>
 		<?php echo $form->error($model,'fil_fone2'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fil_uf'); ?>
-		<?php echo $form->textField($model,'fil_uf',array('size'=>2,'maxlength'=>2)); ?>
+		<?php echo $form->dropDownList($model,'fil_uf',array(
+					'AC'=>'AC','AL'=>'AL','AM'=>'AM','AP'=>'AP','BA'=>'BA',
+					'CE'=>'CE','DF'=>'DF','ES'=>'ES','GO'=>'GO','MA'=>'MA',
+					'MG'=>'MG','MS'=>'MS','MT'=>'MT','PA'=>'PA','PB'=>'PB',
+					'PE'=>'PE','PI'=>'PI','PR'=>'PR','RJ'=>'RJ','RN'=>'RN',
+					'RO'=>'RO','RR'=>'RR','RS'=>'RS','SC'=>'SC','SE'=>'SE',
+					'SP'=>'SP','TO'=>'TO')); ?>
 		<?php echo $form->error($model,'fil_uf'); ?>
 	</div>
 
@@ -104,12 +101,7 @@
 		<?php echo $form->textField($model,'fil_endereco',array('size'=>45,'maxlength'=>220)); ?>
 		<?php echo $form->error($model,'fil_endereco'); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'fil_cep'); ?>
-		<?php echo $form->textField($model,'fil_cep',array('size'=>9,'maxlength'=>9)); ?>
-		<?php echo $form->error($model,'fil_cep'); ?>
-	</div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar' : 'Salvar'); ?>

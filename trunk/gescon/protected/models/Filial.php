@@ -54,7 +54,7 @@ class Filial extends CActiveRecord
 			array('fil_id, emp_id', 'numerical', 'integerOnly'=>true),
 			array('fil_cnpj', 'length', 'max'=>18),
 			array('fil_nome, fil_site, fil_email, fil_obs', 'length', 'max'=>255),
-			array('fil_cpf_representante', 'length', 'max'=>11),
+			array('fil_cpf_representante', 'length', 'max'=>14),
 			array('fil_ativo', 'length', 'max'=>1),
 			array('fil_fone1, fil_fone2', 'length', 'max'=>13),
 			array('fil_uf', 'length', 'max'=>2),
@@ -66,6 +66,7 @@ class Filial extends CActiveRecord
 			// Please remove those attributes that should not be searched.
 			array('fil_id, fil_cnpj, fil_nome, fil_data_ingresso, fil_site, fil_email, fil_cpf_representante, fil_ativo, fil_obs, fil_data_modificacao, fil_data_desligamento, emp_id, fil_fone1, fil_fone2, fil_uf, fil_cidade, fil_endereco, fil_cep', 'safe', 'on'=>'search'),
 			array('fil_cnpj', 'ext.validadores.cnpj'),
+			array('fil_cpf_representante', 'ext.validadores.cpf'),
 			array('fil_email', 'email'),
 		);
 	}
@@ -78,7 +79,7 @@ class Filial extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'emp' => array(self::BELONGS_TO, 'Empresa', 'emp_id'),
+			'empresa' => array(self::BELONGS_TO, 'Empresa', 'emp_id'),
 		);
 	}
 

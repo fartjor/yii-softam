@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Filials'=>array('gerenciar'),
+	'Filiais'=>array('gerenciar'),
 	$model->fil_id,
 );
 
@@ -22,7 +22,10 @@ $this->breadcrumbs=array(
 		'fil_obs',
 		'fil_data_modificacao',
 		'fil_data_desligamento',
-		'emp_id',
+		array(
+			'name' => 'Empresa',
+			'value' => $model->empresa->emp_nome
+		),
 		'fil_fone1',
 		'fil_fone2',
 		'fil_uf',
