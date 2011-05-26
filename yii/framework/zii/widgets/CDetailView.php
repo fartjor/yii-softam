@@ -143,7 +143,7 @@ class CDetailView extends CWidget
 				throw new CException(Yii::t('zii','Please specify the "attributes" property.'));
 		}
 		if($this->nullDisplay===null)
-			$this->nullDisplay='<span class="null">'.Yii::t('zii','Not set').'</span>';
+			$this->nullDisplay='<span class="null">'.Yii::t('zii','Não cadastrado').'</span>';
 		$this->htmlOptions['id']=$this->getId();
 
 		if($this->baseScriptUrl===null)
