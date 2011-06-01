@@ -1,6 +1,6 @@
 <?php
 
-class EmpresaController extends Controller
+class FuncionarioController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -54,11 +54,8 @@ class EmpresaController extends Controller
 	 */
 	public function actionVisualizar()
 	{
-		$model = $this->loadModel();
-		//$filiais = $model->filials->findAll();
-		//$filiais = implode(',', $filiais);
 		$this->render('visualizar',array(
-			'model'=>$model,
+			'model'=>$this->loadModel(),
 		));
 	}
 
@@ -68,19 +65,17 @@ class EmpresaController extends Controller
 	 */
 	public function actionNovo()
 	{
-		$model=new Empresa;
+		$model=new Funcionario;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Empresa']))
+		if(isset($_POST['Funcionario']))
 		{
-			$model->attributes=$_POST['Empresa'];
-			$model->emp_data_ingresso = date('Y-m-d H:i');
-			$model->emp_cpf_socio_majoritario = $this->formatCPF($model->emp_cpf_socio_majoritario);
-			print_r($model->emp_cpf_socio_majoritario);
+			$model->attributes=$_POST['Funcionario'];
+			$model->fun_data_cadastro = date('Y-m-d');
 			if($model->save())
-				$this->redirect(array('visualizar','id'=>$model->emp_id));
+				$this->redirect(array('visualizar','id'=>$model->fun_id));
 		}
 
 		$this->render('novo',array(
@@ -99,12 +94,11 @@ class EmpresaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Empresa']))
+		if(isset($_POST['Funcionario']))
 		{
-			$model->attributes=$_POST['Empresa'];
-			$model->emp_data_modificacao = date('Y-m-d H:i');
+			$model->attributes=$_POST['Funcionario'];
 			if($model->save())
-				$this->redirect(array('visualizar','id'=>$model->emp_id));
+				$this->redirect(array('visualizar','id'=>$model->fun_id));
 		}
 
 		$this->render('atualizar',array(
@@ -120,16 +114,12 @@ class EmpresaController extends Controller
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			try{
-				// we only allow deletion via POST request
-				$this->loadModel()->delete();
-				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-				if(!isset($_GET['ajax']))
-					$this->redirect(array('index'));
-			}catch(Exception $e){
-				$mensagem = 'Erro ao excluir a empresa';
-				$this->render('/site/erro',array('mensagem' => $mensagem));
-			}
+			// we only allow deletion via POST request
+			$this->loadModel()->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(array('index'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -148,10 +138,10 @@ class EmpresaController extends Controller
 	 */
 	public function actionGerenciar()
 	{
-		$model=new Empresa('search');
+		$model=new Funcionario('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Empresa']))
-			$model->attributes=$_GET['Empresa'];
+		if(isset($_GET['Funcionario']))
+			$model->attributes=$_GET['Funcionario'];
 
 		$this->render('gerenciar',array(
 			'model'=>$model,
@@ -167,7 +157,7 @@ class EmpresaController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Empresa::model()->findbyPk($_GET['id']);
+				$this->_model=Funcionario::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -180,13 +170,12 @@ class EmpresaController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='empresa-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='funcionario-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-	
 	protected function formatCPF($cpf){
 		$cpf = substr($cpf, 0, 3) . substr($cpf, 4, 3) . substr($cpf, 8, 3) . substr($cpf, 12, 2);
 		return $cpf;
