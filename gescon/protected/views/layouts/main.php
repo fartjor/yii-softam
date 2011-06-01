@@ -29,10 +29,15 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Empresas', 'url'=>array('/empresa/gerenciar/')),
+				array('label'=>'Filiais', 'url'=>array('/filial/gerenciar/')),
+				array('label'=>'Cargos', 'url'=>array('/cargo/gerenciar/')),
+				array('label'=>'Funcionários', 'url'=>array('/funcionario/gerenciar/')),
+				array('label'=>'Tipos de Processos', 'url'=>array('/tipo_processo/gerenciar/')),
+				array('label'=>'Processos', 'url'=>array('/processo/gerenciar/')),
+				array('label'=>'Clientes', 'url'=>array('/cliente/gerenciar/')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Sair ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->
@@ -45,8 +50,8 @@
 	<?php echo $content; ?>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
+		Todos os direitos reservados &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		Desenvolvido por SOFTAM.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 
