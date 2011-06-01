@@ -73,7 +73,7 @@ class FilialController extends Controller
 		if(isset($_POST['Filial']))
 		{
 			$model->attributes=$_POST['Filial'];
-			$model->fil_data_ingresso = date('Y-m-d');
+			$model->fil_data_ingresso = date('Y-m-d H:i');
 			$model->fil_cpf_representante = $this->formatCPF($model->fil_cpf_representante);
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->fil_id));
@@ -98,6 +98,7 @@ class FilialController extends Controller
 		if(isset($_POST['Filial']))
 		{
 			$model->attributes=$_POST['Filial'];
+			$model->fil_data_modificacao = date('Y-m-d H:i');
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->fil_id));
 		}

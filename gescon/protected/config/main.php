@@ -56,7 +56,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=gescon',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'mysql',
+			'password' => '',
 			'charset' => 'utf8',
 		),
 		

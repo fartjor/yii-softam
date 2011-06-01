@@ -99,6 +99,17 @@ class Empresa extends CActiveRecord
 			'emp_cep' => 'CEP',
 		);
 	}
+	
+	public function scopes(){
+		return array(
+    		'ativos'=>array(
+          		'condition'=>'emp_situacao = "A"',
+    		),
+			'inativos'=>array(
+          		'condition'=>'emp_situacao = "I"',
+    		),
+		);	
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -136,6 +147,8 @@ class Empresa extends CActiveRecord
 		$criteria->compare('emp_endereco',$this->emp_endereco,true);
 
 		$criteria->compare('emp_cep',$this->emp_cep,true);
+		
+		$criteria->compare('emp_situacao',$this->emp_situacao,true);
 
 		return new CActiveDataProvider('Empresa', array(
 			'criteria'=>$criteria,
