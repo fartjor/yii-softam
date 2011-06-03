@@ -102,7 +102,11 @@ class EmpresaController extends Controller
 		if(isset($_POST['Empresa']))
 		{
 			$model->attributes=$_POST['Empresa'];
-			$model->emp_data_modificacao = date('Y-m-d H:i');
+			
+			if ($model->emp_situacao == 'I')
+				$model->emp_data_desativacao = date('Y-m-d H:i:s');
+			else
+				$model->emp_data_modificacao = date('Y-m-d H:i:s');
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->emp_id));
 		}

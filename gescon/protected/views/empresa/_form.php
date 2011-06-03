@@ -40,6 +40,12 @@
 							'mask' => '999.999.999-99', 'htmlOptions' => array('size' => 14)));?>
 		<?php echo $form->error($model,'emp_cpf_socio_majoritario'); ?>
 	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'emp_nome_socio_majoritario'); ?>
+		<?php echo $form->textField($model,'emp_nome_socio_majoritario',array('size'=>45,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'emp_nome_socio_majoritario'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'emp_fone1'); ?>
@@ -84,6 +90,12 @@
 		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_cep', 
 							'mask' => '99999-999', 'htmlOptions' => array('size' => 9)));?>
 		<?php echo $form->error($model,'emp_cep'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'emp_situacao'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'emp_situacao', $model->SituacaoOptions); ?>
+		<?php echo $form->error($model,'emp_situacao'); ?>
 	</div>
 
 	<div class="row buttons">

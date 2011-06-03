@@ -56,9 +56,10 @@ class Empresa extends CActiveRecord
 			array('emp_cidade', 'length', 'max'=>60),
 			array('emp_endereco', 'length', 'max'=>200),
 			array('emp_cep', 'length', 'max'=>9),
+			array('emp_situacao, emp_nome_socio_majoritario', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('emp_id, emp_nome, emp_cnpj, emp_data_ingresso, emp_site, emp_email, emp_cpf_socio_majoritario, emp_fone1, emp_fone2, emp_uf, emp_cidade, emp_endereco, emp_cep', 'safe', 'on'=>'search'),
+			array('emp_id, emp_nome, emp_cnpj, emp_data_ingresso, emp_site, emp_email, emp_cpf_socio_majoritario, emp_fone1, emp_fone2, emp_uf, emp_cidade, emp_endereco, emp_cep, emp_nome_socio_majoritario', 'safe', 'on'=>'search'),
 			array('emp_email', 'ext.validadores.email'),
 			array('emp_cpf_socio_majoritario', 'ext.validadores.cpf'),
 			array('emp_cnpj', 'ext.validadores.cnpj'),
@@ -97,6 +98,8 @@ class Empresa extends CActiveRecord
 			'emp_cidade' => 'Cidade',
 			'emp_endereco' => 'Endereço',
 			'emp_cep' => 'CEP',
+			'emp_situacao' => 'Situação',
+			'emp_nome_socio_majoritario' => 'Nome do Sócio Majoritário',
 		);
 	}
 	
@@ -110,6 +113,19 @@ class Empresa extends CActiveRecord
     		),
 		);	
 	}
+	
+	public function getSituacaoText()
+    {
+    	$options=$this->situacaoOptions;
+        return $options[$this->emp_situacao];
+    }
+	public function getSituacaoOptions()
+    {
+        return array(
+            'A'=>'Ativa',
+            'I'=>'Inativa',
+     	);
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -149,6 +165,8 @@ class Empresa extends CActiveRecord
 		$criteria->compare('emp_cep',$this->emp_cep,true);
 		
 		$criteria->compare('emp_situacao',$this->emp_situacao,true);
+		
+		$criteria->compare('emp_nome_socio_majoritario',$this->emp_nome_socio_majoritario,true);
 
 		return new CActiveDataProvider('Empresa', array(
 			'criteria'=>$criteria,

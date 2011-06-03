@@ -98,7 +98,10 @@ class FilialController extends Controller
 		if(isset($_POST['Filial']))
 		{
 			$model->attributes=$_POST['Filial'];
-			$model->fil_data_modificacao = date('Y-m-d H:i');
+			if ($model->fil_ativo == 'I')
+				$model->fil_data_desligamento = date('Y-m-d H:i:s');
+			else
+				$model->fil_data_modificacao = date('Y-m-d H:i:s');
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->fil_id));
 		}

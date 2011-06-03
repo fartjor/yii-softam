@@ -45,6 +45,7 @@ or <b>=</b>) para otimizar suas pesquisas.
 		),
 		'fil_email',
 		'fil_cpf_representante',
+		'fil_nome_representante',
 		'fil_fone1',
 		'fil_cidade',
 		'fil_uf',
