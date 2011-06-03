@@ -41,9 +41,11 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'emp_cnpj',
 		'emp_email',
 		'emp_cpf_socio_majoritario',
+		'emp_nome_socio_majoritario',
 		'emp_fone1',
 		'emp_cidade',
 		'emp_uf',
+		'emp_situacao',
 		/*
 		'emp_id',
 		'emp_data_ingresso',

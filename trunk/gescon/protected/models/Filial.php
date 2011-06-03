@@ -61,10 +61,10 @@ class Filial extends CActiveRecord
 			array('fil_cidade', 'length', 'max'=>60),
 			array('fil_endereco', 'length', 'max'=>220),
 			array('fil_cep', 'length', 'max'=>9),
-			array('fil_data_modificacao, fil_data_desligamento', 'safe'),
+			array('fil_data_modificacao, fil_data_desligamento, fil_nome_representante', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('fil_id, fil_cnpj, fil_nome, fil_data_ingresso, fil_site, fil_email, fil_cpf_representante, fil_ativo, fil_obs, fil_data_modificacao, fil_data_desligamento, emp_id, fil_fone1, fil_fone2, fil_uf, fil_cidade, fil_endereco, fil_cep', 'safe', 'on'=>'search'),
+			array('fil_id, fil_cnpj, fil_nome, fil_data_ingresso, fil_site, fil_email, fil_cpf_representante, fil_nome_representante, fil_ativo, fil_obs, fil_data_modificacao, fil_data_desligamento, emp_id, fil_fone1, fil_fone2, fil_uf, fil_cidade, fil_endereco, fil_cep', 'safe', 'on'=>'search'),
 			array('fil_cnpj', 'ext.validadores.cnpj'),
 			array('fil_cpf_representante', 'ext.validadores.cpf'),
 			array('fil_email', 'email'),
@@ -107,6 +107,7 @@ class Filial extends CActiveRecord
 			'fil_cidade' => 'Cidade',
 			'fil_endereco' => 'Endereço',
 			'fil_cep' => 'CEP',
+			'fil_nome_representante' => 'Nome do Representante'
 		);
 	}
 	public function getAtivoText()
@@ -146,6 +147,8 @@ class Filial extends CActiveRecord
 		$criteria->compare('fil_email',$this->fil_email,true);
 
 		$criteria->compare('fil_cpf_representante',$this->fil_cpf_representante,true);
+		
+		$criteria->compare('fil_nome_representante',$this->fil_nome_representante,true);
 
 		$criteria->compare('fil_ativo',$this->fil_ativo,true);
 

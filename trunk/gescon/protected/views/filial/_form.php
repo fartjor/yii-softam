@@ -11,10 +11,10 @@
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'emp_id'); ?>
-		<?php echo CHtml::activeDropDownList($model,'emp_id',CHtml::listData(Empresa::model()->findAll(), 
+		<?php echo CHtml::activeDropDownList($model,'emp_id',CHtml::listData(Empresa::model()->ativos()->findAll(), 
 														"emp_id", "emp_nome"), 
-			  											array(	'empty' => 'Selecione uma Instituição -->',
-			  											  	  	'id' => 'ins_codigo',
+			  											array(	'empty' => 'Selecione uma Empresa -->',
+			  											  	  	'id' => 'emp_id',
 														)
 			  										); ?> 
 		<?php echo $form->error($model,'emp_id'); ?>
@@ -50,6 +50,12 @@
 		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'fil_cpf_representante', 
 							'mask' => '999.999.999-99', 'htmlOptions' => array('size' => 14)));?>
 		<?php echo $form->error($model,'fil_cpf_representante'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'fil_nome_representante'); ?>
+		<?php echo $form->textField($model,'fil_nome_representante',array('size'=>45,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'fil_nome_representante'); ?>
 	</div>
 
 	<div class="row">
@@ -104,7 +110,7 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar' : 'Salvar'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar Filial' : 'Salvar Filial'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

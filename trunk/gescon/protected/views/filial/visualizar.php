@@ -8,20 +8,26 @@ $this->breadcrumbs=array(
 
 <h1>Visualizando Filial #<?php echo $model->fil_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php 
+	if (isset($model->fil_data_modificacao))
+		$data_modificacao = date('d/m/Y H:i:s', strtotime($model->fil_data_modificacao));
+	else
+		$data_modificacao = '';
+	if (isset($model->fil_data_desligamento))
+		$data_desligamento = date('d/m/Y H:i:s', strtotime($model->fil_data_desligamento));
+	else
+		$data_desligamento = '';
+	$this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'fil_id',
 		'fil_cnpj',
 		'fil_nome',
-		'fil_data_ingresso',
 		'fil_site',
 		'fil_email',
 		'fil_cpf_representante',
-		'fil_ativo',
+		'fil_nome_representante',
 		'fil_obs',
-		'fil_data_modificacao',
-		'fil_data_desligamento',
 		array(
 			'name' => 'Empresa',
 			'value' => $model->empresa->emp_nome
@@ -32,5 +38,18 @@ $this->breadcrumbs=array(
 		'fil_cidade',
 		'fil_endereco',
 		'fil_cep',
+		'fil_ativo',
+		array(
+			'name' => 'Data de Cadastro',
+			'value' => date('d/m/Y H:i:s', strtotime($model->fil_data_ingresso))
+		),
+		array(
+			'name' => 'Data de Modifica&ccedil;&atilde;o',
+			'value' => $data_modificacao,
+		),
+		array(
+			'name' => 'Data de desligamento',
+			'value' => $data_desligamento,
+		),
 	),
 )); ?>
