@@ -49,6 +49,10 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'fil_fone1',
 		'fil_cidade',
 		'fil_uf',
+		array(
+			'name' => 'Situação',
+			'value' => $model->getAtivoText(),
+		),
 		/*
 		'fil_site',
 		'fil_id',

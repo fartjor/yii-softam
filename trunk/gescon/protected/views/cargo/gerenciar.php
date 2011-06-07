@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 <h1>Gerenciar Cargos</h1>
 
 <p>
-Você pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+Vocï¿½ pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) para otimizar suas pesquisas.
 </p>
 <div align="right">
@@ -40,7 +40,7 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'car_nome',
 		'car_obs',
 		array(
-			'name' => 'Situaação',
+			'name' => 'SituaÃ§Ã£o',
 			'value' => '$data->getAtivoText()'
 		),
 		array(

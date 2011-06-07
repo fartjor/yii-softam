@@ -45,7 +45,10 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'emp_fone1',
 		'emp_cidade',
 		'emp_uf',
-		'emp_situacao',
+		array(
+			'name' => 'Situação',
+			'value' => '$data->getSituacaoText()',
+		),
 		/*
 		'emp_id',
 		'emp_data_ingresso',
