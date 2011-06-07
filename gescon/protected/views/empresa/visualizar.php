@@ -33,7 +33,10 @@ $this->breadcrumbs=array(
 		'emp_cidade',
 		'emp_endereco',
 		'emp_cep',
-		'emp_situacao',
+		array(
+			'name' => 'Situa&ccedil;&atilde;o',
+			'value' => $model->getSituacaoText(),
+		),
 		array(
 			'name' => 'Data de Cadastro',
 			'value' => date('d/m/Y H:i:s', strtotime($model->emp_data_ingresso))

@@ -68,6 +68,7 @@ class Filial extends CActiveRecord
 			array('fil_cnpj', 'ext.validadores.cnpj'),
 			array('fil_cpf_representante', 'ext.validadores.cpf'),
 			array('fil_email', 'email'),
+			array('fil_ativo', 'safe'),
 		);
 	}
 
@@ -112,7 +113,7 @@ class Filial extends CActiveRecord
 	}
 	public function getAtivoText()
     {
-    	$options=$this->AtivoOptions;
+    	$options=$this->ativoOptions;
         return $options[$this->fil_ativo];
     }
 	public function getAtivoOptions()
