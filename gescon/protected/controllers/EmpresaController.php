@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 class EmpresaController extends Controller
 {
@@ -32,7 +32,7 @@ class EmpresaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','visualizar','view'),
+				'actions'=>array('index','visualizar','view','carregarfiliais'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -101,12 +101,17 @@ class EmpresaController extends Controller
 
 		if(isset($_POST['Empresa']))
 		{
+<<<<<<< .mine
+			$model->attributes=$_POST['Empresa'];
+			$model->emp_data_modificacao = date('Y-m-d H:i');
+=======
 			$model->attributes=$_POST['Empresa'];
 			
 			if ($model->emp_situacao == 'I')
 				$model->emp_data_desativacao = date('Y-m-d H:i:s');
 			else
 				$model->emp_data_modificacao = date('Y-m-d H:i:s');
+>>>>>>> .r25
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->emp_id));
 		}
@@ -194,5 +199,24 @@ class EmpresaController extends Controller
 	protected function formatCPF($cpf){
 		$cpf = substr($cpf, 0, 3) . substr($cpf, 4, 3) . substr($cpf, 8, 3) . substr($cpf, 12, 2);
 		return $cpf;
+	}
+	
+	public function actionCarregarfiliais($empresa){
+		if ($empresa == '')
+			$empresa = '0';
+		
+		$criteria = new CDbCriteria();
+		$criteria->order='fil_nome';
+		$criteria->condition = 'emp_id = ' . $empresa;
+		echo CHtml::tag('option',
+                   array('value'=>''),CHtml::encode('Selecione uma Filial -->'),true);
+		$data = Filial::model()->findAll($criteria);
+ 
+    	$data = CHtml::listData($data,'fil_id','fil_nome');
+    	foreach($data as $value=>$name)
+    	{
+        	echo CHtml::tag('option',
+                   array('value'=>$value),CHtml::encode($name),true);
+    	}	
 	}
 }

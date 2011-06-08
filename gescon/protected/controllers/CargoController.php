@@ -73,7 +73,7 @@ class CargoController extends Controller
 		if(isset($_POST['Cargo']))
 		{
 			$model->attributes=$_POST['Cargo'];
-			$model->car_data_ingresso = date('Y-m-d');
+			$model->car_data_ingresso = date('Y-m-d H:i:s');
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->car_id));
 		}
@@ -97,6 +97,7 @@ class CargoController extends Controller
 		if(isset($_POST['Cargo']))
 		{
 			$model->attributes=$_POST['Cargo'];
+			$model->car_data_modificacao = date('Y-m-d H:i:s');
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->car_id));
 		}
