@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $this->breadcrumbs=array(
 	'Filiais'=>array('gerenciar'),
 	'Gerenciar',
@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 <h1>Gerenciar Filiais</h1>
 
 <p>
-Você pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+VocÃª pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) para otimizar suas pesquisas.
 </p>
 <div align="right">
@@ -51,7 +51,7 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'fil_uf',
 		array(
 			'name' => 'Situação',
-			'value' => $model->getAtivoText(),
+			'value' => '$data->getAtivoText()',
 		),
 		/*
 		'fil_site',
