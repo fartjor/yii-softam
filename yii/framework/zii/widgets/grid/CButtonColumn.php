@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * CButtonColumn class file.
  *
@@ -199,7 +199,7 @@ class CButtonColumn extends CGridColumn
 		if($this->deleteButtonImageUrl===null)
 			$this->deleteButtonImageUrl=$this->grid->baseScriptUrl.'/delete.png';
 		if($this->deleteConfirmation===null)
-			$this->deleteConfirmation=Yii::t('zii','Voc� deseja realmente excluir este registro?');
+			$this->deleteConfirmation=Yii::t('zii','Você deseja realmente excluir este registro?');
 
 		foreach(array('view','update','delete') as $id)
 		{
