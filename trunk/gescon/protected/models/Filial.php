@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * This is the model class for table "filial".
@@ -113,7 +113,7 @@ class Filial extends CActiveRecord
 	}
 	public function getAtivoText()
     {
-    	$options=$this->ativoOptions;
+    	$options = $this->ativoOptions;
         return $options[$this->fil_ativo];
     }
 	public function getAtivoOptions()
