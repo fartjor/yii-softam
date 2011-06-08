@@ -152,45 +152,25 @@ class Funcionario extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
 		$criteria->compare('fun_id',$this->fun_id);
-
 		$criteria->compare('fun_cpf',$this->fun_cpf,true);
-
 		$criteria->compare('fun_data_cadastro',$this->fun_data_cadastro,true);
-
 		$criteria->compare('fun_numero_funcionario',$this->fun_numero_funcionario);
-
 		$criteria->compare('fun_nome',$this->fun_nome,true);
-
 		$criteria->compare('fun_sexo',$this->fun_sexo,true);
-
 		$criteria->compare('fun_estado_civil',$this->fun_estado_civil,true);
-
 		$criteria->compare('fun_funcao',$this->fun_funcao,true);
-
 		$criteria->compare('fun_email',$this->fun_email,true);
-
 		$criteria->compare('fun_obs',$this->fun_obs,true);
-
 		$criteria->compare('fun_data_modificacao',$this->fun_data_modificacao,true);
-
 		$criteria->compare('fun_data_desligamento',$this->fun_data_desligamento,true);
-
 		$criteria->compare('car_id',$this->car_id);
-
 		$criteria->compare('fun_fone1',$this->fun_fone1,true);
-
 		$criteria->compare('fun_fone2',$this->fun_fone2,true);
-
 		$criteria->compare('fun_endereco',$this->fun_endereco,true);
-
 		$criteria->compare('fun_cidade',$this->fun_cidade,true);
-
 		$criteria->compare('fun_uf',$this->fun_uf,true);
-
 		$criteria->compare('fun_cep',$this->fun_cep,true);
-
 		return new CActiveDataProvider('Funcionario', array(
 			'criteria'=>$criteria,
 		));
