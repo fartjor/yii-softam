@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * This is the model class for table "empresa".
@@ -101,8 +101,7 @@ class Empresa extends CActiveRecord
 			'emp_situacao' => 'Situação',
 			'emp_nome_socio_majoritario' => 'Nome do Sócio Majoritário',
 		);
-	}
-	
+	}	
 	public function scopes(){
 		return array(
     		'ativos'=>array(
@@ -126,6 +125,7 @@ class Empresa extends CActiveRecord
             'I'=>'Inativa',
      	);
     }
+
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -162,6 +162,11 @@ class Empresa extends CActiveRecord
 
 		$criteria->compare('emp_endereco',$this->emp_endereco,true);
 
+
+		$criteria->compare('emp_cep',$this->emp_cep,true);
+		
+		$criteria->compare('emp_situacao',$this->emp_situacao,true);
+
 		$criteria->compare('emp_cep',$this->emp_cep,true);
 		
 		$criteria->compare('emp_situacao',$this->emp_situacao,true);
@@ -172,6 +177,7 @@ class Empresa extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
  
 	
 }

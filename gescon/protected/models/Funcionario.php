@@ -53,8 +53,8 @@ class Funcionario extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('fun_cpf, fun_data_cadastro, fun_numero_funcionario, fun_nome, fun_sexo, fun_estado_civil, fun_funcao, fun_email, car_id, emp_id, fun_fone1, fun_endereco, fun_cidade, fun_uf', 'required'),
-			array('fun_id, fun_numero_funcionario, car_id, emp_id', 'numerical', 'integerOnly'=>true),
+			array('fun_cpf, fun_data_cadastro, fun_numero_funcionario, fun_nome, fun_sexo, fun_estado_civil, fun_funcao, fun_email, car_id, fun_fone1, fun_endereco, fun_cidade, fun_uf, fil_id', 'required'),
+			array('fun_id, fun_numero_funcionario, car_id', 'numerical', 'integerOnly'=>true),
 			array('fun_cpf', 'length', 'max'=>14),
 			array('fun_nome', 'length', 'max'=>100),
 			array('fun_sexo, fun_estado_civil, fun_estado', 'length', 'max'=>1),
@@ -68,7 +68,7 @@ class Funcionario extends CActiveRecord
 			array('fun_data_modificacao, fun_data_desligamento', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('fun_id, fun_cpf, fun_data_cadastro, fun_numero_funcionario, fun_nome, fun_sexo, fun_estado_civil, fun_funcao, fun_email, fun_estado, fun_obs, fun_data_modificacao, fun_data_desligamento, car_id, emp_id, fun_fone1, fun_fone2, fun_endereco, fun_cidade, fun_uf, fun_cep', 'safe', 'on'=>'search'),
+			array('fun_id, fun_cpf, fun_data_cadastro, fun_numero_funcionario, fun_nome, fun_sexo, fun_estado_civil, fun_funcao, fun_email, fun_estado, fun_obs, fun_data_modificacao, fun_data_desligamento, car_id, fun_fone1, fun_fone2, fun_endereco, fun_cidade, fun_uf, fun_cep', 'safe', 'on'=>'search'),
 			array('fun_cpf', 'ext.validadores.cpf'),
 			array('fun_email', 'email'),
 		);
@@ -83,7 +83,7 @@ class Funcionario extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'cargo' => array(self::BELONGS_TO, 'Cargo', 'car_id'),
-			'empresa' => array(self::BELONGS_TO, 'Empresa', 'emp_id'),
+			'filial' => array(self::BELONGS_TO, 'Filial', 'fil_id'),
 		);
 	}
 
@@ -106,7 +106,7 @@ class Funcionario extends CActiveRecord
 			'fun_data_modificacao' => 'Data de Modificação',
 			'fun_data_desligamento' => 'Data de Desligamento',
 			'car_id' => 'Cargo',
-			'emp_id' => 'Empresa',
+			'fil_id' => 'Filial',
 			'fun_fone1' => 'Telefone 1',
 			'fun_fone2' => 'Telefone 2',
 			'fun_endereco' => 'Endereço',
@@ -139,7 +139,7 @@ class Funcionario extends CActiveRecord
             'S'=>'Solteiro',
             'C'=>'Casado',
         	'D'=>'Divorciado',
-        	'V'=>'Viúvo',
+        	'V'=>'Vi�vo',
      	);
      }
 	/**
@@ -178,8 +178,6 @@ class Funcionario extends CActiveRecord
 		$criteria->compare('fun_data_desligamento',$this->fun_data_desligamento,true);
 
 		$criteria->compare('car_id',$this->car_id);
-
-		$criteria->compare('emp_id',$this->emp_id);
 
 		$criteria->compare('fun_fone1',$this->fun_fone1,true);
 
