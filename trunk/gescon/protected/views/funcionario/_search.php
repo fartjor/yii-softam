@@ -76,8 +76,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'emp_id'); ?>
-		<?php echo $form->textField($model,'emp_id'); ?>
+		<?php echo $form->label($model,'fil_id'); ?>
+		<?php echo $form->textField($model,'fil_id'); ?>
 	</div>
 
 	<div class="row">

@@ -18,11 +18,20 @@ $this->breadcrumbs=array(
 	else
 		$data_desligamento = '';		
 	$this->widget('zii.widgets.CDetailView', array(
+
 	'data'=>$model,
 	'attributes'=>array(
 		'emp_id',
 		'emp_nome',
 		'emp_cnpj',
+		array(
+			'name' => 'Data de Cadastro',
+			'value' => date('d/m/Y H:i:s', strtotime($model->emp_data_ingresso))
+		),
+		array(
+			'name' => 'Data de Modifica&ccedil;&atilde;o',
+			'value' => $data_modificacao,
+		),
 		'emp_site',
 		'emp_email',
 		'emp_cpf_socio_majoritario',

@@ -16,14 +16,26 @@ $this->breadcrumbs=array(
 		'fun_data_cadastro',
 		'fun_numero_funcionario',
 		'fun_nome',
-		'fun_sexo',
-		'fun_estado_civil',
+		array(
+			'name' => 'Sexo',
+			'value' => $model->getSexoText()	
+		),
+		array(
+			'name' => 'Estado Civil',
+			'value' => $model->getEstadoText()	
+		),
 		'fun_funcao',
 		'fun_email',
 		'fun_data_modificacao',
 		'fun_data_desligamento',
-		'car_id',
-		'emp_id',
+		array(
+			'name' => 'Filial',
+			'value' => $model->filial->fil_nome,	
+		),
+		array(
+			'name' => 'Cargo',
+			'value' => $model->cargo->car_nome,	
+		),
 		'fun_fone1',
 		'fun_fone2',
 		'fun_endereco',

@@ -20,6 +20,8 @@
 		<?php echo $form->label($model,'emp_cpf_socio_majoritario'); ?>
 		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_cpf_socio_majoritario', 
 							'mask' => '999.999.999-99', 'htmlOptions' => array('size' => 14)));?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_cpf_socio_majoritario', 
+							'mask' => '999.999.999-99', 'htmlOptions' => array('size' => 14)));?>
 	</div>
 	
 	<div class="row">
@@ -45,6 +47,11 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'emp_cep'); ?>
+
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_cep', 
+							'mask' => '99999-999', 'htmlOptions' => array('size' => 9)));?>
+	</div>
+
 		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'emp_cep', 
 							'mask' => '99999-999', 'htmlOptions' => array('size' => 9)));?>
 	</div>
@@ -56,11 +63,10 @@
 	</div>
 	
 
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Pesquisar'); ?>
 	</div>
 	<br /><br />
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->
