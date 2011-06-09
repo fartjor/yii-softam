@@ -73,7 +73,7 @@ class Tipo_processoController extends Controller
 		if(isset($_POST['Tipo_processo']))
 		{
 			$model->attributes=$_POST['Tipo_processo'];
-			$model->tpr_data_ingresso = date('Y-m-d');
+			$model->tpr_data_ingresso = date('Y-m-d H:i:s');
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->tpr_id));
 		}

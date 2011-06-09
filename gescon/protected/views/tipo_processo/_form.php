@@ -9,11 +9,6 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'tpr_numero'); ?>
-		<?php echo $form->textField($model,'tpr_numero'); ?>
-		<?php echo $form->error($model,'tpr_numero'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tpr_nome'); ?>
@@ -31,6 +26,12 @@
 		<?php echo $form->labelEx($model,'tpr_obs'); ?>
 		<?php echo $form->textArea($model,'tpr_obs',array('cols'=>45, 'rows' => 4,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'tpr_obs'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'tpr_situacao'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'tpr_situacao', $model->situacaoOptions); ?>
+		<?php echo $form->error($model,'tpr_situacao'); ?>
 	</div>
 
 	<div class="row buttons">

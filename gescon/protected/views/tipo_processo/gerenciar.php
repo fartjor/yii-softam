@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 <h1>Gerenciar Tipos de Processo</h1>
 
 <p>
-Voc� pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+Você pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) para otimizar suas pesquisas.
 </p>
 <div align="right">
@@ -37,12 +37,13 @@ or <b>=</b>) para otimizar suas pesquisas.
 	'id'=>'tipo-processo-grid',
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
-		'tpr_id',
-		'tpr_numero',
 		'tpr_nome',
 		'tpr_area_atuacao',
-		'tpr_data_ingresso',
 		'tpr_obs',
+		array(
+			'name' => 'Situação',
+			'value' => '$data->getSituacaoText()',
+		),
 		/*
 		'tpr_data_modificacao',
 		'tpr_data_desativacao',
