@@ -40,14 +40,13 @@ class Tipo_processo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tpr_numero, tpr_nome, tpr_area_atuacao, tpr_data_ingresso', 'required'),
-			array('tpr_numero', 'numerical'),
+			array('tpr_nome, tpr_area_atuacao, tpr_data_ingresso', 'required'),
 			array('tpr_nome, tpr_area_atuacao', 'length', 'max'=>100),
 			array('tpr_obs', 'length', 'max'=>255),
-			array('tpr_data_modificacao, tpr_data_desativacao', 'safe'),
+			array('tpr_data_modificacao tpr_situacao', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('tpr_id, tpr_numero, tpr_nome, tpr_area_atuacao, tpr_data_ingresso, tpr_obs, tpr_data_modificacao, tpr_data_desativacao', 'safe', 'on'=>'search'),
+			array('tpr_id, tpr_nome, tpr_area_atuacao, tpr_data_ingresso, tpr_obs, tpr_data_modificacao, tpr_situacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,15 +69,27 @@ class Tipo_processo extends CActiveRecord
 	{
 		return array(
 			'tpr_id' => 'Código',
-			'tpr_numero' => 'Número',
 			'tpr_nome' => 'Nome',
 			'tpr_area_atuacao' => 'Área de Atuacao',
 			'tpr_data_ingresso' => 'Data de Cadastro',
 			'tpr_obs' => 'Observação',
 			'tpr_data_modificacao' => 'Data de Modificação',
-			'tpr_data_desativacao' => 'Data de Desativação',
+			'tpr_situacao' => 'Situação'
 		);
 	}
+	
+	public function getSituacaoText()
+    {
+    	$options=$this->situacaoOptions;
+        return $options[$this->tpr_situacao];
+    }
+	public function getSituacaoOptions()
+    {
+        return array(
+            'A'=>'Ativa',
+            'I'=>'Inativa',
+     	);
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -93,8 +104,6 @@ class Tipo_processo extends CActiveRecord
 
 		$criteria->compare('tpr_id',$this->tpr_id);
 
-		$criteria->compare('tpr_numero',$this->tpr_numero);
-
 		$criteria->compare('tpr_nome',$this->tpr_nome,true);
 
 		$criteria->compare('tpr_area_atuacao',$this->tpr_area_atuacao,true);
@@ -104,8 +113,7 @@ class Tipo_processo extends CActiveRecord
 		$criteria->compare('tpr_obs',$this->tpr_obs,true);
 
 		$criteria->compare('tpr_data_modificacao',$this->tpr_data_modificacao,true);
-
-		$criteria->compare('tpr_data_desativacao',$this->tpr_data_desativacao,true);
+		$criteria->compare('tpr_situacao',$this->tpr_situacao,true);
 
 		return new CActiveDataProvider('Tipo_processo', array(
 			'criteria'=>$criteria,

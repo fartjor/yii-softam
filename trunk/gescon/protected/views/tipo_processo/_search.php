@@ -5,15 +5,7 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'tpr_id'); ?>
-		<?php echo $form->textField($model,'tpr_id'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'tpr_numero'); ?>
-		<?php echo $form->textField($model,'tpr_numero'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'tpr_nome'); ?>
@@ -26,28 +18,14 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'tpr_data_ingresso'); ?>
-		<?php echo $form->textField($model,'tpr_data_ingresso'); ?>
+		<?php echo $form->label($model,'tpr_situacao'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'tpr_situacao', $model->situacaoOptions, 
+					array('empty' => 'Todos')); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'tpr_obs'); ?>
-		<?php echo $form->textField($model,'tpr_obs',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'tpr_data_modificacao'); ?>
-		<?php echo $form->textField($model,'tpr_data_modificacao'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'tpr_data_desativacao'); ?>
-		<?php echo $form->textField($model,'tpr_data_desativacao'); ?>
-	</div>
-
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Pesquisar'); ?>
 	</div>
+	<br /><br />
 
 <?php $this->endWidget(); ?>
 
