@@ -37,25 +37,32 @@ or <b>=</b>) para otimizar suas pesquisas.
 	'id'=>'cliente-grid',
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
-		'cli_id',
+		
 		'cli_cpf',
-		'cli_data_cadastro',
-		'cli_numero_cliente',
+		
 		'cli_nome',
-		'cli_sexo',
+		array(
+			'name' => 'Sexo',
+			'value' => '$data->getSexoText()',
+		),
+		'cli_email',
+		'cli_fone1',
+		'cli_cidade',
+		'cli_uf',
 		/*
+		 * 'cli_id',
+		 * 'cli_data_cadastro',
 		'cli_estado_civil',
 		'cli_profissao',
-		'cli_email',
+		
 		'cli_conhecimento',
 		'cli_obs',
 		'cli_data_modificacao',
 		'cli_data_desligamento',
-		'cli_fone1',
+		
 		'cli_fone2',
 		'cli_endereco',
-		'cli_cidade',
-		'cli_uf',
+		
 		'cli_cep',
 		*/
 		array(

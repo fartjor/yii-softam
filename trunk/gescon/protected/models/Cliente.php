@@ -116,7 +116,7 @@ class Cliente extends CActiveRecord
 	public function getSexoText()
     {
     	$options=$this->SexoOptions;
-        return $options[$this->fun_sexo];
+        return $options[$this->cli_sexo];
     }
 	public function getSexoOptions()
     {
@@ -128,7 +128,7 @@ class Cliente extends CActiveRecord
 	public function getEstadoText()
     {
     	$options=$this->EstadoOptions;
-        return $options[$this->fun_estado_civil];
+        return $options[$this->cli_estado_civil];
     }
 	public function getEstadoOptions()
     {
@@ -149,45 +149,23 @@ class Cliente extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
 		$criteria->compare('cli_id',$this->cli_id);
-
 		$criteria->compare('cli_cpf',$this->cli_cpf,true);
-
 		$criteria->compare('cli_data_cadastro',$this->cli_data_cadastro,true);
-
-		$criteria->compare('cli_numero_cliente',$this->cli_numero_cliente);
-
 		$criteria->compare('cli_nome',$this->cli_nome,true);
-
 		$criteria->compare('cli_sexo',$this->cli_sexo,true);
-
 		$criteria->compare('cli_estado_civil',$this->cli_estado_civil,true);
-
 		$criteria->compare('cli_profissao',$this->cli_profissao,true);
-
 		$criteria->compare('cli_email',$this->cli_email,true);
-
 		$criteria->compare('cli_conhecimento',$this->cli_conhecimento,true);
-
 		$criteria->compare('cli_obs',$this->cli_obs,true);
-
 		$criteria->compare('cli_data_modificacao',$this->cli_data_modificacao,true);
-
-		$criteria->compare('cli_data_desligamento',$this->cli_data_desligamento,true);
-
 		$criteria->compare('cli_fone1',$this->cli_fone1,true);
-
 		$criteria->compare('cli_fone2',$this->cli_fone2,true);
-
 		$criteria->compare('cli_endereco',$this->cli_endereco,true);
-
 		$criteria->compare('cli_cidade',$this->cli_cidade,true);
-
 		$criteria->compare('cli_uf',$this->cli_uf,true);
-
 		$criteria->compare('cli_cep',$this->cli_cep,true);
-
 		return new CActiveDataProvider('Cliente', array(
 			'criteria'=>$criteria,
 		));
