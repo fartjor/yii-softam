@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Tipo Processos'=>array('gerenciar'),
+	'Tipos de Processo'=>array('gerenciar'),
 	'Gerenciar',
 );
 

@@ -6,23 +6,9 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'cli_id'); ?>
-		<?php echo $form->textField($model,'cli_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'cli_cpf'); ?>
-		<?php echo $form->textField($model,'cli_cpf',array('size'=>14,'maxlength'=>14)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_data_cadastro'); ?>
-		<?php echo $form->textField($model,'cli_data_cadastro'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_numero_cliente'); ?>
-		<?php echo $form->textField($model,'cli_numero_cliente'); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'cli_cpf', 
+							'mask' => '999.999.999-99', 'htmlOptions' => array('size' => 14)));?>
 	</div>
 
 	<div class="row">
@@ -32,57 +18,19 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'cli_sexo'); ?>
-		<?php echo $form->textField($model,'cli_sexo',array('size'=>1,'maxlength'=>1)); ?>
+		<?php echo CHtml::activeDropDownList($model, 'cli_sexo', $model->SexoOptions,
+				array('empty' => 'Todos')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'cli_estado_civil'); ?>
-		<?php echo $form->textField($model,'cli_estado_civil',array('size'=>1,'maxlength'=>1)); ?>
+		<?php echo CHtml::activeDropDownList($model, 'cli_estado_civil', $model->EstadoOptions,
+					array('empty' => 'Todos')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'cli_profissao'); ?>
 		<?php echo $form->textField($model,'cli_profissao',array('size'=>60,'maxlength'=>100)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_email'); ?>
-		<?php echo $form->textField($model,'cli_email',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_conhecimento'); ?>
-		<?php echo $form->textField($model,'cli_conhecimento',array('size'=>45,'maxlength'=>45)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_obs'); ?>
-		<?php echo $form->textField($model,'cli_obs',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_data_modificacao'); ?>
-		<?php echo $form->textField($model,'cli_data_modificacao'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_data_desligamento'); ?>
-		<?php echo $form->textField($model,'cli_data_desligamento'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_fone1'); ?>
-		<?php echo $form->textField($model,'cli_fone1',array('size'=>13,'maxlength'=>13)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_fone2'); ?>
-		<?php echo $form->textField($model,'cli_fone2',array('size'=>13,'maxlength'=>13)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_endereco'); ?>
-		<?php echo $form->textField($model,'cli_endereco',array('size'=>60,'maxlength'=>120)); ?>
 	</div>
 
 	<div class="row">
@@ -92,17 +40,19 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'cli_uf'); ?>
-		<?php echo $form->textField($model,'cli_uf',array('size'=>2,'maxlength'=>2)); ?>
+		<?php echo $form->dropDownList($model,'cli_uf',array(
+					''=> 'Todos', 'AC'=>'AC','AL'=>'AL','AM'=>'AM','AP'=>'AP','BA'=>'BA',
+					'CE'=>'CE','DF'=>'DF','ES'=>'ES','GO'=>'GO','MA'=>'MA',
+					'MG'=>'MG','MS'=>'MS','MT'=>'MT','PA'=>'PA','PB'=>'PB',
+					'PE'=>'PE','PI'=>'PI','PR'=>'PR','RJ'=>'RJ','RN'=>'RN',
+					'RO'=>'RO','RR'=>'RR','RS'=>'RS','SC'=>'SC','SE'=>'SE',
+					'SP'=>'SP','TO'=>'TO')); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cli_cep'); ?>
-		<?php echo $form->textField($model,'cli_cep',array('size'=>9,'maxlength'=>9)); ?>
-	</div>
-
+	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Pesquisar'); ?>
 	</div>
+	<br /><br />
 
 <?php $this->endWidget(); ?>
 

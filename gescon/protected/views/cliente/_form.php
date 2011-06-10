@@ -17,12 +17,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'cli_numero_cliente'); ?>
-		<?php echo $form->textField($model,'cli_numero_cliente'); ?>
-		<?php echo $form->error($model,'cli_numero_cliente'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'cli_nome'); ?>
 		<?php echo $form->textField($model,'cli_nome',array('size'=>45,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'cli_nome'); ?>
