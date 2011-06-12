@@ -49,6 +49,12 @@
 					'SP'=>'SP','TO'=>'TO')); ?>
 	</div>
 	
+	<div class="row">
+		<?php echo $form->labelEx($model,'cli_situacao'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'cli_situacao', $model->situacaoOptions, 
+		array('empty' => 'Todos')); ?>
+	</div>
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Pesquisar'); ?>
 	</div>
