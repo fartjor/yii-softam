@@ -73,7 +73,7 @@ class ClienteController extends Controller
 		if(isset($_POST['Cliente']))
 		{
 			$model->attributes=$_POST['Cliente'];
-			$model->cli_data_cadastro = date('Y-m-d');
+			$model->cli_data_cadastro = date('Y-m-d H:i:s');
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->cli_id));
 		}
@@ -97,6 +97,7 @@ class ClienteController extends Controller
 		if(isset($_POST['Cliente']))
 		{
 			$model->attributes=$_POST['Cliente'];
+			$model->cli_data_modificacao = date('Y-m-d H:i:s');
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->cli_id));
 		}

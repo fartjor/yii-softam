@@ -49,6 +49,10 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'cli_fone1',
 		'cli_cidade',
 		'cli_uf',
+		array(
+			'name' => 'Situação',
+			'value' => '$data->getSituacaoText()',
+		),
 		/*
 		 * 'cli_id',
 		 * 'cli_data_cadastro',

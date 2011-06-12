@@ -40,7 +40,9 @@ class Processo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pro_numero, pro_data_ingresso, cli_id, tpr_id', 'required'),
+			array('pro_data_ingresso, cli_id, tpr_id pro_car_placa, 
+				   pro_car_renavan, pro_car_ano, pro_car_modelo, pro_car_marca, pro_car_valor
+				   pro_car_qtde_prestacoes, pro_car_valor_parcela, pro_car_chaci', 'required'),
 			array('cli_id, tpr_id', 'numerical', 'integerOnly'=>true),
 			array('pro_numero', 'numerical'),
 			array('pro_obs', 'length', 'max'=>255),
@@ -78,9 +80,30 @@ class Processo extends CActiveRecord
 			'pro_data_desativacao' => 'Data de Desativação',
 			'cli_id' => 'Cliente',
 			'tpr_id' => 'Tipo de Processo',
+			'pro_car_placa' => 'Placa do Veículo',
+			'pro_car_renavan' => 'Renavan',
+			'pro_car_ano' => 'Ano',
+			'pro_car_modelo' => 'Modelo do Veículo',
+			'pro_car_marca' => 'Marca do Veículo',
+			'pro_car_valor' => 'Valor do Veículo',
+			'pro_car_qtde_prestacoes' => 'Quantidade de Parcelas pagas',
+			'pro_car_valor_parcela' => 'Valor da Parcela',
+			'pro_car_chaci' => 'Chaci',
 		);
 	}
-
+	
+	public function beforeValidate(){
+		$patterns = array();
+		$patterns[0] = '/R/';
+		$patterns[1] = '/./';
+		$patterns[2] = '/,/';
+		$replacements = array(); 
+		$replacements[2] = 'rs';
+		$replacements[1] = 'dot';
+		$replacements[0] = 'virgula';
+		$this->pro_car_valor = preg_replace($patterns, $replacements, $this->pro_car_valor);
+		return parent::beforeValidate();
+	}
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

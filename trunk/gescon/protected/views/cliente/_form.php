@@ -103,6 +103,12 @@
 		<?php echo $form->textArea($model,'cli_obs',array('cols'=>45,'rows'=> 4,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'cli_obs'); ?>
 	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'cli_situacao'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'cli_situacao', $model->situacaoOptions); ?>
+		<?php echo $form->error($model,'cli_situacao'); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar' : 'Salvar'); ?>

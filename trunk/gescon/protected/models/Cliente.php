@@ -7,7 +7,7 @@
  * @property integer $cli_id
  * @property string $cli_cpf
  * @property string $cli_data_cadastro
- * @property integer $cli_numero_cliente
+ * @property integer $cli_s
  * @property string $cli_nome
  * @property string $cli_sexo
  * @property string $cli_estado_civil
@@ -51,8 +51,7 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cli_cpf, cli_data_cadastro, cli_numero_cliente, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_fone1, cli_endereco, cli_cidade, cli_uf', 'required'),
-			array('cli_numero_cliente', 'numerical', 'integerOnly'=>true),
+			array('cli_cpf, cli_data_cadastro, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_fone1, cli_endereco, cli_cidade, cli_uf', 'required'),
 			array('cli_cpf', 'length', 'max'=>14),
 			array('cli_nome, cli_profissao', 'length', 'max'=>100),
 			array('cli_sexo, cli_estado_civil', 'length', 'max'=>1),
@@ -63,10 +62,10 @@ class Cliente extends CActiveRecord
 			array('cli_cidade', 'length', 'max'=>60),
 			array('cli_uf', 'length', 'max'=>2),
 			array('cli_cep', 'length', 'max'=>9),
-			array('cli_data_modificacao, cli_data_desligamento', 'safe'),
+			array('cli_data_modificacao, cli_situacao', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cli_id, cli_cpf, cli_data_cadastro, cli_numero_cliente, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_email, cli_conhecimento, cli_obs, cli_data_modificacao, cli_data_desligamento, cli_fone1, cli_fone2, cli_endereco, cli_cidade, cli_uf, cli_cep', 'safe', 'on'=>'search'),
+			array('cli_id, cli_cpf, cli_data_cadastro, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_email, cli_conhecimento, cli_obs, cli_data_modificacao, cli_data_desligamento, cli_fone1, cli_fone2, cli_endereco, cli_cidade, cli_uf, cli_cep', 'safe', 'on'=>'search'),
 			array('cli_cpf', 'ext.validadores.cpf'),
 			array('cli_email', 'email'),
 		);
@@ -94,7 +93,6 @@ class Cliente extends CActiveRecord
 			'cli_id' => 'Código',
 			'cli_cpf' => 'CPF',
 			'cli_data_cadastro' => 'Data de Cadastro',
-			'cli_numero_cliente' => 'Numero do Cliente',
 			'cli_nome' => 'Nome',
 			'cli_sexo' => 'Sexo',
 			'cli_estado_civil' => 'Estado Civil',
@@ -110,6 +108,7 @@ class Cliente extends CActiveRecord
 			'cli_cidade' => 'Cidade',
 			'cli_uf' => 'UF',
 			'cli_cep' => 'CEP',
+			'cli_situacao' => 'Situação',
 		);
 	}
 
@@ -139,6 +138,18 @@ class Cliente extends CActiveRecord
         	'V'=>'Viúvo',
      	);
      }
+	public function getSituacaoText()
+    {
+    	$options=$this->situacaoOptions;
+        return $options[$this->cli_situacao];
+    }
+	public function getSituacaoOptions()
+    {
+        return array(
+            'A'=>'Ativa',
+            'I'=>'Inativa',
+     	);
+    }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
@@ -166,6 +177,7 @@ class Cliente extends CActiveRecord
 		$criteria->compare('cli_cidade',$this->cli_cidade,true);
 		$criteria->compare('cli_uf',$this->cli_uf,true);
 		$criteria->compare('cli_cep',$this->cli_cep,true);
+		$criteria->compare('cli_situacao',$this->cli_situacao ,true);
 		return new CActiveDataProvider('Cliente', array(
 			'criteria'=>$criteria,
 		));
