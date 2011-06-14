@@ -61,8 +61,8 @@ class Processo extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cli' => array(self::BELONGS_TO, 'Cliente', 'cli_id'),
-			'tpr' => array(self::BELONGS_TO, 'TipoProcesso', 'tpr_id'),
+			'cliente' => array(self::BELONGS_TO, 'Cliente', 'cli_id'),
+			'tipo_processo' => array(self::BELONGS_TO, 'Tipo_processo', 'tpr_id'),
 		);
 	}
 
@@ -93,16 +93,19 @@ class Processo extends CActiveRecord
 	}
 	
 	public function beforeValidate(){
-		$patterns = array();
-		$patterns[0] = '/R/';
-		$patterns[1] = '/./';
-		$patterns[2] = '/,/';
-		$replacements = array(); 
-		$replacements[2] = 'rs';
-		$replacements[1] = 'dot';
-		$replacements[0] = 'virgula';
-		$this->pro_car_valor = preg_replace($patterns, $replacements, $this->pro_car_valor);
+		$this->pro_car_valor = $this->tiraMoeda($this->pro_car_valor);
+		$this->pro_car_valor_parcela = $this->tiraMoeda($this->pro_car_valor_parcela);
+		
 		return parent::beforeValidate();
+	}
+	
+	public function tiraMoeda($valor){
+		$valor = substr($valor, 3);
+		$pontos = '.';
+		$virgula = ',';
+		$valor = str_replace($pontos, "", $valor);
+		$valor = str_replace($virgula, ".", $valor);
+		return $valor;
 	}
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
