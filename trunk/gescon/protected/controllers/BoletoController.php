@@ -1,7 +1,6 @@
-
 <?php
 
-class ProcessoController extends Controller
+class BoletoController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -41,7 +40,7 @@ class ProcessoController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciar','delete','novoboleto','novaacao'),
+				'actions'=>array('gerenciar','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -66,28 +65,16 @@ class ProcessoController extends Controller
 	 */
 	public function actionNovo()
 	{
-		$model=new Processo;
+		$model=new Boleto;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Processo']))
+		if(isset($_POST['Boleto']))
 		{
-			$model->attributes=$_POST['Processo'];
-			$model->pro_data_ingresso = date('Y-m-d');
-			$model->pro_situacao = 'I';
-			
-			if($model->save()){
-				$acao = new Acao_processo;
-				$acao->aca_tipo = 'I';
-				$acao->usu_id = 1;
-				$acao->aca_obs = 'O processo foi iniciado';
-				$acao->pro_id = $model->pro_id;
-				$acao->aca_data = date('Y-m-d H:i:s');
-				print_r($acao->attributes);
-				$acao->save();
-				$this->redirect(array('visualizar','id'=>$model->pro_id));
-			}
+			$model->attributes=$_POST['Boleto'];
+			if($model->save())
+				$this->redirect(array('visualizar','id'=>$model->bol_codigo));
 		}
 
 		$this->render('novo',array(
@@ -106,11 +93,11 @@ class ProcessoController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Processo']))
+		if(isset($_POST['Boleto']))
 		{
-			$model->attributes=$_POST['Processo'];
+			$model->attributes=$_POST['Boleto'];
 			if($model->save())
-				$this->redirect(array('visualizar','id'=>$model->pro_id));
+				$this->redirect(array('visualizar','id'=>$model->bol_codigo));
 		}
 
 		$this->render('atualizar',array(
@@ -150,67 +137,16 @@ class ProcessoController extends Controller
 	 */
 	public function actionGerenciar()
 	{
-		$model=new Processo('search');
+		$model=new Boleto('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Processo']))
-			$model->attributes=$_GET['Processo'];
-
+		if(isset($_GET['Boleto']))
+			$model->attributes=$_GET['Boleto'];
+			$model->pro_id = $_GET["processo"];
 		$this->render('gerenciar',array(
 			'model'=>$model,
 		));
 	}
-	
-	public function actionBoleto(){
-		
-		$this->render('boleto',array(
 
-		));	
-	}
-	
-	public function actionNovaacao($processo){
-		$model=new Acao_processo;
-		
-		if(isset($_POST['Acao_processo']))
-		{
-			$mprocesso = Processo::model()->findByPk($processo);
-			
-			$model->attributes=$_POST['Acao_processo'];
-			$model->pro_id = $processo;
-			$model->aca_tipo_anterior = $mprocesso->pro_situacao;
-			$model->usu_id = 1;
-			$model->aca_data = date('Y-m-d H:i:s');
-						
-			if($model->save()){
-				$mprocesso->pro_situacao = $model->aca_tipo;
-				$mprocesso->save();
-				$this->redirect(array('../acao_processo/gerenciar','processo'=>$processo));
-			}
-		}
-		$this->render('novaacao',array(
-			'model'=>$model,
-			'processo' => $processo,
-		));
-	}
-
-	public function actionNovoboleto($processo){
-		$model = new Boleto;
-		
-		if(isset($_POST['Boleto']))
-		{
-			$mprocesso = Processo::model()->findByPk($processo);
-			
-			$model->attributes=$_POST['Boleto'];
-			
-						
-			if($model->save()){
-				$this->redirect(array('../boleto/gerenciar','processo'=>$processo));
-			}
-		}
-		$this->render('novoboleto',array(
-			'model'=>$model,
-			'processo' => $processo,
-		));
-	}
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
@@ -220,7 +156,7 @@ class ProcessoController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Processo::model()->findbyPk($_GET['id']);
+				$this->_model=Boleto::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -233,7 +169,7 @@ class ProcessoController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='processo-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='boleto-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
