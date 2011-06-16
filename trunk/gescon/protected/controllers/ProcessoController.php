@@ -41,7 +41,7 @@ class ProcessoController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciar','delete','boleto'),
+				'actions'=>array('gerenciar','delete','boleto','novaacao'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -75,8 +75,19 @@ class ProcessoController extends Controller
 		{
 			$model->attributes=$_POST['Processo'];
 			$model->pro_data_ingresso = date('Y-m-d');
-			if($model->save())
+			$model->pro_situacao = 'I';
+			
+			if($model->save()){
+				$acao = new Acao_processo;
+				$acao->aca_tipo = 'I';
+				$acao->usu_id = 1;
+				$acao->aca_obs = 'O processo foi iniciado';
+				$acao->pro_id = $model->pro_id;
+				$acao->aca_data = date('Y-m-d H:i:s');
+				print_r($acao->attributes);
+				$acao->save();
 				$this->redirect(array('visualizar','id'=>$model->pro_id));
+			}
 		}
 
 		$this->render('novo',array(
@@ -154,6 +165,31 @@ class ProcessoController extends Controller
 		$this->render('boleto',array(
 
 		));	
+	}
+	
+	public function actionNovaacao($processo){
+		$model=new Acao_processo;
+		
+		if(isset($_POST['Acao_processo']))
+		{
+			$mprocesso = Processo::model()->findByPk($processo);
+			
+			$model->attributes=$_POST['Acao_processo'];
+			$model->pro_id = $processo;
+			$model->aca_tipo_anterior = $mprocesso->pro_situacao;
+			$model->usu_id = 1;
+			$model->aca_data = date('Y-m-d H:i:s');
+						
+			if($model->save()){
+				$mprocesso->pro_situacao = $model->aca_tipo;
+				$mprocesso->save();
+				$this->redirect(array('../acao_processo/gerenciar','processo'=>$processo));
+			}
+		}
+		$this->render('novaacao',array(
+			'model'=>$model,
+			'processo' => $processo,
+		));
 	}
 
 	/**

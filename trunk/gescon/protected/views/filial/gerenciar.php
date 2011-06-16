@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 <h1>Gerenciar Filiais</h1>
 
 <p>
-VocÃª pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+Você pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) para otimizar suas pesquisas.
 </p>
 <div align="right">

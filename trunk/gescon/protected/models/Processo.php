@@ -89,8 +89,25 @@ class Processo extends CActiveRecord
 			'pro_car_qtde_prestacoes' => 'Quantidade de Parcelas pagas',
 			'pro_car_valor_parcela' => 'Valor da Parcela',
 			'pro_car_chaci' => 'Chaci',
+			'pro_situacao' => 'Situação'
 		);
 	}
+	
+	public function getSituacaoText()
+    {
+    	$options=$this->situacaoOptions;
+        return $options[$this->pro_situacao];
+    }
+	public function getSituacaoOptions()
+    {
+        return array(
+            'I'=>'Iniciado',
+            'A'=>'Aberto',
+        	'C'=>'Cancelado',
+        	'E'=>'Em Processo',
+        	'F'=>'Fechado',
+     	);
+    }
 	
 	public function beforeValidate(){
 		$this->pro_car_valor = $this->tiraMoeda($this->pro_car_valor);

@@ -7,6 +7,9 @@ $this->breadcrumbs=array(
 ?>
 
 <h1>Visualizando Processo #<?php echo $model->pro_id; ?></h1>
+<div>
+	<a href="<?php echo Yii::app()->request->baseUrl; ?>/acao_processo/gerenciar/processo/<?php echo $model->pro_id;?>">Ações</a>
+</div>
 
 <?php 
 	if (isset($model->pro_data_modificacao))
@@ -36,6 +39,10 @@ $this->breadcrumbs=array(
 		'pro_car_valor',
 		'pro_car_qtde_prestacoes',
 		'pro_car_valor_parcela',
+		array(
+			'name' => 'Situação',
+			'value' => $model->getSituacaoText()	
+		),
 		array(
 			'name' => 'Data de Cadastro',
 			'value' => date('d/m/Y H:i:s', strtotime($model->pro_data_ingresso))
