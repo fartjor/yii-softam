@@ -13,7 +13,7 @@
  */
 class Boleto extends CActiveRecord
 {
-	public $tipo,$qtde;
+	public $qtde, $data;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Boleto the static model class
@@ -39,11 +39,12 @@ class Boleto extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('bol_codigo, bol_valor, bol_vencimento, bol_situacao', 'required'),
+			array('bol_codigo, bol_valor, bol_vencimento, bol_situacao, bol_tipo, data', 'required'),
 			array('bol_codigo, pro_id', 'numerical', 'integerOnly'=>true),
 			array('bol_valor', 'length', 'max'=>9),
 			array('bol_transacao', 'length', 'max'=>20),
 			array('bol_situacao', 'length', 'max'=>45),
+			array('data', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('bol_codigo, bol_valor, bol_vencimento, bol_transacao, bol_situacao, pro_id', 'safe', 'on'=>'search'),
@@ -69,13 +70,14 @@ class Boleto extends CActiveRecord
 	{
 		return array(
 			'bol_codigo' => 'Bol Codigo',
-			'bol_valor' => 'Bol Valor',
+			'bol_valor' => 'Valor da Cobrança',
 			'bol_vencimento' => 'Bol Vencimento',
 			'bol_transacao' => 'Bol Transacao',
 			'bol_situacao' => 'Bol Situacao',
 			'pro_id' => 'Pro',
-			'tipo' => 'Tipo de Cobrança',
+			'bol_tipo' => 'Tipo de Cobrança',
 			'qtde' => 'Quantidade de Parcelas',
+			'data' => 'Data do Vencimento',
 		);
 	}
 	
@@ -97,6 +99,23 @@ class Boleto extends CActiveRecord
     public function types(){
     	return array('qtde' => 'int');
     }
+    
+	public function beforeValidate(){
+		$this->bol_valor = $this->tiraMoeda($this->bol_valor);
+		
+		$this->bol_vencimento = date('Y-m-d', strtotime($this->bol_vencimento));
+		
+		return parent::beforeValidate();
+	}
+    
+	public function tiraMoeda($valor){
+		$valor = substr($valor, 3);
+		$pontos = '.';
+		$virgula = ',';
+		$valor = str_replace($pontos, "", $valor);
+		$valor = str_replace($virgula, ".", $valor);
+		return $valor;
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

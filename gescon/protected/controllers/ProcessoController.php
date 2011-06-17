@@ -41,7 +41,7 @@ class ProcessoController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciar','delete','novoboleto','novaacao'),
+				'actions'=>array('gerenciar','delete','novoboleto','novaacao','valorprocesso'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -84,7 +84,6 @@ class ProcessoController extends Controller
 				$acao->aca_obs = 'O processo foi iniciado';
 				$acao->pro_id = $model->pro_id;
 				$acao->aca_data = date('Y-m-d H:i:s');
-				print_r($acao->attributes);
 				$acao->save();
 				$this->redirect(array('visualizar','id'=>$model->pro_id));
 			}
@@ -194,16 +193,19 @@ class ProcessoController extends Controller
 
 	public function actionNovoboleto($processo){
 		$model = new Boleto;
-		
 		if(isset($_POST['Boleto']))
 		{
-			$mprocesso = Processo::model()->findByPk($processo);
-			
-			$model->attributes=$_POST['Boleto'];
-			
-						
-			if($model->save()){
-				$this->redirect(array('../boleto/gerenciar','processo'=>$processo));
+			//$mprocesso = Processo::model()->findByPk($processo);
+			if($_POST["Boleto"]["bol_tipo"] == 'E'){
+				$model->bol_valor = $_POST["Boleto"]["bol_valor"];
+				$model->bol_vencimento = $_POST["data"];
+				$model->data = $_POST["data"];
+				$model->bol_situacao = 'Boleto Gerado';
+				$model->pro_id = $processo;
+				$model->bol_tipo = $_POST["Boleto"]["bol_tipo"];
+				if($model->save()){
+					$this->redirect(array('../boleto/gerenciar','processo'=>$processo));
+				}	
 			}
 		}
 		$this->render('novoboleto',array(
@@ -211,6 +213,7 @@ class ProcessoController extends Controller
 			'processo' => $processo,
 		));
 	}
+
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
