@@ -27,6 +27,7 @@ $this->breadcrumbs=array(
 		'cli_fone1',
 		'cli_fone2',
 		'cli_endereco',
+		'cli_bairro',
 		'cli_cidade',
 		'cli_uf',
 		'cli_cep',

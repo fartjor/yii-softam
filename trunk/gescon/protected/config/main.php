@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
@@ -56,7 +56,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=gescon',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'mysql',
+			'password' => '',
 			'charset' => 'utf8',
 		),
 		
@@ -71,6 +71,11 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
+            	array(
+                	'class'=>'CWebLogRoute',
+                	'categories'=>'system.db.CDbCommand',
+                	'showInFireBug'=>true,
+           	 	),
 				// uncomment the following to show log messages on web pages
 				/*
 				array(
