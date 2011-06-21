@@ -1,4 +1,3 @@
-
 <?php
 
 class ProcessoController extends Controller
@@ -197,21 +196,30 @@ class ProcessoController extends Controller
 		{
 			//$mprocesso = Processo::model()->findByPk($processo);
 			if($_POST["Boleto"]["bol_tipo"] == 'E'){
+				
 				$model->bol_valor = $_POST["Boleto"]["bol_valor"];
-				$model->bol_vencimento = $_POST["data"];
 				$model->data = $_POST["data"];
+				$model->bol_vencimento = $model->data;
 				$model->bol_situacao = 'Boleto Gerado';
 				$model->pro_id = $processo;
 				$model->bol_tipo = $_POST["Boleto"]["bol_tipo"];
-				if($model->save()){
+				if($model->validate())
+					$model->bol_tipo = $_POST["Boleto"]["bol_tipo"];
+				else
+					$model->bol_tipo = $_POST["Boleto"]["bol_tipo"];
+				
+				if($model->save(false)){
 					$this->redirect(array('../boleto/gerenciar','processo'=>$processo));
 				}	
 			}
 		}
+		else
+		{
 		$this->render('novoboleto',array(
 			'model'=>$model,
 			'processo' => $processo,
 		));
+		}
 	}
 
 	/**

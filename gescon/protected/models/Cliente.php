@@ -51,7 +51,7 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cli_cpf, cli_data_cadastro, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_fone1, cli_endereco, cli_cidade, cli_uf', 'required'),
+			array('cli_cpf, cli_data_cadastro, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_fone1, cli_endereco, cli_cidade, cli_uf, cli_bairro', 'required'),
 			array('cli_cpf', 'length', 'max'=>14),
 			array('cli_nome, cli_profissao', 'length', 'max'=>100),
 			array('cli_sexo, cli_estado_civil', 'length', 'max'=>1),
@@ -62,7 +62,7 @@ class Cliente extends CActiveRecord
 			array('cli_cidade', 'length', 'max'=>60),
 			array('cli_uf', 'length', 'max'=>2),
 			array('cli_cep', 'length', 'max'=>9),
-			array('cli_data_modificacao, cli_situacao', 'safe'),
+			array('cli_data_modificacao, cli_situacao, cli_bairro', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('cli_id, cli_cpf, cli_data_cadastro, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_email, cli_conhecimento, cli_obs, cli_data_modificacao, cli_data_desligamento, cli_fone1, cli_fone2, cli_endereco, cli_cidade, cli_uf, cli_cep', 'safe', 'on'=>'search'),
@@ -109,6 +109,7 @@ class Cliente extends CActiveRecord
 			'cli_uf' => 'UF',
 			'cli_cep' => 'CEP',
 			'cli_situacao' => 'Situação',
+			'cli_bairro' => 'Bairro'
 		);
 	}
 

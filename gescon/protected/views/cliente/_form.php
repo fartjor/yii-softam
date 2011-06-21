@@ -72,6 +72,12 @@
 		<?php echo $form->textField($model,'cli_endereco',array('size'=>45,'maxlength'=>120)); ?>
 		<?php echo $form->error($model,'cli_endereco'); ?>
 	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'cli_bairro'); ?>
+		<?php echo $form->textField($model,'cli_bairro',array('size'=>45,'maxlength'=>80)); ?>
+		<?php echo $form->error($model,'cli_bairro'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cli_cidade'); ?>
