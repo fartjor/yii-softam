@@ -67,6 +67,7 @@ class CButtonColumn extends CGridColumn
 	 */
 	public $viewButtonOptions=array('class'=>'visualizar');
 
+	public $geraridBoleto;
 	/**
 	 * @var string the label for the update button. Defaults to "Update".
 	 * Note that the label will not be HTML-encoded when rendering.
@@ -93,23 +94,23 @@ class CButtonColumn extends CGridColumn
 	 * @var string the label for the delete button. Defaults to "Delete".
 	 * Note that the label will not be HTML-encoded when rendering.
 	 */
-	public $deleteButtonLabel;
+	public $deleteButtonLabel, $gerarButtonLabel;
 	/**
 	 * @var string the image URL for the delete button. If not set, an integrated image will be used.
 	 * You may set this property to be false to render a text link instead.
 	 */
-	public $deleteButtonImageUrl;
+	public $deleteButtonImageUrl,$gerarButtonImageUrl;
 	/**
 	 * @var string a PHP expression that is evaluated for every delete button and whose result is used
 	 * as the URL for the delete button. In this expression, the variable
 	 * <code>$row</code> the row number (zero-based); <code>$data</code> the data model for the row;
 	 * and <code>$this</code> the column object.
 	 */
-	public $deleteButtonUrl='Yii::app()->controller->createUrl("delete",array("id"=>$data->primaryKey))';
+	public $deleteButtonUrl='Yii::app()->controller->createUrl("delete",array("id"=>$data->primaryKey))', $gerarButtonUrl;
 	/**
 	 * @var array the HTML options for the view button tag.
 	 */
-	public $deleteButtonOptions=array('class'=>'delete');
+	public $deleteButtonOptions=array('class'=>'delete'), $gerarButtonOptions;
 	/**
 	 * @var string the confirmation message to be displayed when delete button is clicked.
 	 * By setting this property to be false, no confirmation message will be displayed.
@@ -201,13 +202,14 @@ class CButtonColumn extends CGridColumn
 		if($this->deleteConfirmation===null)
 			$this->deleteConfirmation=Yii::t('zii','Você deseja realmente excluir este registro?');
 
-		foreach(array('view','update','delete') as $id)
+		foreach(array('view','update','delete', 'gerar') as $id)
 		{
 			$button=array(
 				'label'=>$this->{$id.'ButtonLabel'},
 				'url'=>$this->{$id.'ButtonUrl'},
 				'imageUrl'=>$this->{$id.'ButtonImageUrl'},
 				'options'=>$this->{$id.'ButtonOptions'},
+				'geraridBoleto'=>$this->geraridBoleto,
 			);
 			if(isset($this->buttons[$id]))
 				$this->buttons[$id]=array_merge($button,$this->buttons[$id]);
@@ -303,16 +305,24 @@ EOD;
 	 */
 	protected function renderButton($id,$button,$row,$data)
 	{
-		if (isset($button['visible']) && !$this->evaluateExpression($button['visible'],array('row'=>$row,'data'=>$data)))
-  			return;
-		$label=isset($button['label']) ? $button['label'] : $id;
-		$url=isset($button['url']) ? $this->evaluateExpression($button['url'],array('data'=>$data,'row'=>$row)) : '#';
-		$options=isset($button['options']) ? $button['options'] : array();
-		if(!isset($options['title']))
-			$options['title']=$label;
-		if(isset($button['imageUrl']) && is_string($button['imageUrl']))
-			echo CHtml::link(CHtml::image($button['imageUrl'],$label),$url,$options);
-		else
-			echo CHtml::link($label,$url,$options);
+		if ($id == 'gerar'){
+			echo CHtml::beginForm('');
+				echo Chtml::hiddenField('idBoleto',$this->geraridBoleto);
+				echo CHtml::submitButton('Ok');
+			echo CHtml::endForm();
+		}
+		else{
+			if (isset($button['visible']) && !$this->evaluateExpression($button['visible'],array('row'=>$row,'data'=>$data)))
+  				return;
+			$label=isset($button['label']) ? $button['label'] : $id;
+			$url=isset($button['url']) ? $this->evaluateExpression($button['url'],array('data'=>$data,'row'=>$row)) : '#';
+			$options=isset($button['options']) ? $button['options'] : array();
+			if(!isset($options['title']))
+				$options['title']=$label;
+			if(isset($button['imageUrl']) && is_string($button['imageUrl']))
+				echo CHtml::link(CHtml::image($button['imageUrl'],$label),$url,$options);
+			else
+				echo CHtml::link($label,$url,$options);
+		}
 	}
 }
