@@ -38,16 +38,23 @@ or <b>=</b>) para otimizar suas pesquisas.
 	'id'=>'processo-grid',
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
-		'pro_id',
 		'pro_numero',
-		'pro_data_ingresso',
+		array(
+			'name' => 'cli_id',
+			'value'=> '$data->cliente->cli_nome'
+		),
+		array(
+			'name' => 'tpr_id',
+			'value'=> '$data->tipo_processo->tpr_nome'
+		),
 		'pro_obs',
 		'pro_data_modificacao',
 		'pro_data_desativacao',
-		/*
-		'cli_id',
-		'tpr_id',
-		*/
+		'pro_data_ingresso',
+		array(
+			'name' => 'pro_situacao',
+			'value' => '$data->getSituacaoText()',
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),

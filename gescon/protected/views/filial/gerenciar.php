@@ -50,7 +50,7 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'fil_cidade',
 		'fil_uf',
 		array(
-			'name' => 'Situação',
+			'name' => 'fil_ativo',
 			'value' => '$data->getAtivoText()',
 		),
 		/*

@@ -19,7 +19,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gerenciar Funcionarios</h1>
+<h1>Gerenciar Funcionários</h1>
 
 <p>
 Você pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>

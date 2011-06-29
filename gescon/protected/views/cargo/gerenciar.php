@@ -41,7 +41,7 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'car_nome',
 		'car_obs',
 		array(
-			'name' => 'Situação',
+			'name' => 'car_ativo',
 			'value' => '$data->getAtivoText()'
 		),
 		array(

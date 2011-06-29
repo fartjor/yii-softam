@@ -41,7 +41,7 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'tpr_area_atuacao',
 		'tpr_obs',
 		array(
-			'name' => 'Situação',
+			'name' => 'tpr_situacao',
 			'value' => '$data->getSituacaoText()',
 		),
 		/*
