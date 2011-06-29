@@ -47,7 +47,7 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'emp_cidade',
 		'emp_uf',
 		array(
-			'name' => 'Situação',
+			'name' => 'emp_situacao',
 			'value' => '$data->getSituacaoText()',
 		),
 		/*
