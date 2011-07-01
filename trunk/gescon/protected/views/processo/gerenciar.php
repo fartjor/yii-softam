@@ -47,10 +47,8 @@ or <b>=</b>) para otimizar suas pesquisas.
 			'name' => 'tpr_id',
 			'value'=> '$data->tipo_processo->tpr_nome'
 		),
-		'pro_obs',
-		'pro_data_modificacao',
-		'pro_data_desativacao',
 		'pro_data_ingresso',
+		'pro_obs',
 		array(
 			'name' => 'pro_situacao',
 			'value' => '$data->getSituacaoText()',

@@ -7,9 +7,9 @@ $this->breadcrumbs=array(
 ?>
 
 <h1>Visualizando Processo #<?php echo $model->pro_id; ?></h1>
-<div>
-	<a href="<?php echo Yii::app()->request->baseUrl; ?>/acao_processo/gerenciar/processo/<?php echo $model->pro_id;?>">Ações</a>
-	<a href="<?php echo Yii::app()->request->baseUrl; ?>/boleto/gerenciar/processo/<?php echo $model->pro_id;?>">Financeiro</a>
+<div align="right">
+	<?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl. '/images/acoes.jpg'),array('acao_processo/gerenciar/processo/' . $model->pro_id)); ?>
+	<?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl. '/images/financeiro.jpg'),array('boleto/gerenciar/processo/' . $model->pro_id)); ?>
 </div>
 
 <?php 
