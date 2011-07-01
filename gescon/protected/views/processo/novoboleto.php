@@ -9,10 +9,13 @@
 $this->breadcrumbs=array(
 	'Processos'=>array('processo/gerenciar'),
 	$processo=>array('processo/visualizar/' . $processo),
-	'Financeiro' => array('../aboleto/gerenciar/processo/'. $processo),
+	'Financeiro' => array('../boleto/gerenciar/processo/'. $processo),
 	'Novo Boleto',
 );
 ?>
+
+<h1>Novo Boleto para o Processo #<?php echo $processo; ?></h1>
+<br />
 
 <div class="form">
 
