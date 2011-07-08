@@ -1,8 +1,16 @@
 <?php
-$this->breadcrumbs=array(
-	'Processos'=>array('gerenciar'),
-	$model->pro_id,
-);
+	if (!Yii::app()->user->getState('funcao') == '1'){
+		$this->breadcrumbs=array(
+			'Processos'=>array('gerenciar'),
+			$model->pro_id,
+		);
+	}
+	else{
+		$this->breadcrumbs=array(
+			'Meus Processos'=>array('gerenciarcliente'),
+			$model->pro_id,
+		);	
+	}
 
 ?>
 
@@ -41,7 +49,7 @@ $this->breadcrumbs=array(
 		'pro_car_qtde_prestacoes',
 		'pro_car_valor_parcela',
 		array(
-			'name' => 'Situação',
+			'name' => 'pro_situacao',
 			'value' => $model->getSituacaoText()	
 		),
 		array(
@@ -49,7 +57,7 @@ $this->breadcrumbs=array(
 			'value' => date('d/m/Y H:i:s', strtotime($model->pro_data_ingresso))
 		),
 		array(
-			'name' => 'Data de Modifica&ccedil;&atilde;o',
+			'name' => 'pro_data_modificacao',
 			'value' => $data_modificacao,
 		),
 		

@@ -71,10 +71,10 @@ class Boleto extends CActiveRecord
 		return array(
 			'bol_codigo' => 'Bol Codigo',
 			'bol_valor' => 'Valor da CobranÃ§a',
-			'bol_vencimento' => 'Data de Vencimento',
+			'bol_vencimento' => 'Data do Vencimento Original',
 			'bol_transacao' => 'Bol Transacao',
-			'bol_situacao' => 'Situação',
-			'pro_id' => 'Pro',
+			'bol_situacao' => 'SituaÃ§Ã£o',
+			'pro_id' => 'CÃ³digo do Processo',
 			'bol_tipo' => 'Tipo de CobranÃ§a',
 			'qtde' => 'Quantidade de Parcelas',
 			'data' => 'Data do Vencimento',
@@ -110,7 +110,7 @@ class Boleto extends CActiveRecord
 		//echo '<br />Valor: ' . $this->bol_valor;
 		//echo '<br />Vencimento: ' . $this->bol_vencimento;
 		//echo '<br />Data: ' . $this->data;
-		//echo '<br />Situação: ' . $this->bol_situacao;
+		//echo '<br />Situaï¿½ï¿½o: ' . $this->bol_situacao;
 		//echo '<br />Processo: ' . $this->pro_id;
 		//echo '<br />Tipo: ' . $this->bol_tipo;
 		

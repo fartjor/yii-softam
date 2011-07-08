@@ -227,3 +227,7 @@ div.search-form
 {
 	background: #80CFFF;
 }
+#home {
+	background-image: url("../images/contratos.jpg");
+	height: 506px;
+}

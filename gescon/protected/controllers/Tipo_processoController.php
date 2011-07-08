@@ -31,17 +31,9 @@ class Tipo_processoController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','visualizar','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('novo','atualizar'),
-				'users'=>array('@'),
-			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciar','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('gerenciar','delete','novo','atualizar','index','visualizar','view'),
+				'expression'=>"Yii::app()->user->getState('funcao') == '3' || Yii::app()->user->getState('funcao') == '2'",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

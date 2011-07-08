@@ -18,16 +18,16 @@ class UserIdentity extends CUserIdentity
 	private $_id;
     public function authenticate()
     {
-        $record = Tecnico::model()->findByAttributes(array('tec_email'=>$this->username . '@amazonasenergia.gov.br'));
+        $record = Usuario::model()->findByAttributes(array('usu_login'=>$this->username));
         if($record===null)
             $this->errorCode=self::ERROR_USERNAME_INVALID;
-        else if($record->tec_senha!==(md5($this->password)))
+        else if($record->usu_senha!==(md5($this->password)))
             $this->errorCode=self::ERROR_PASSWORD_INVALID;
         else
         {
-            $this->_id=$record->tec_email;
+            $this->_id=$record->usu_login;
             $this->setState('funcao', $record->fun_id);
-			$this->setState('id', $record->tec_id);
+			$this->setState('id', $record->usu_id);
             $this->errorCode=self::ERROR_NONE;
         }
         return !$this->errorCode;

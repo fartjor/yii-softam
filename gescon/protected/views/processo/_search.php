@@ -36,8 +36,14 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'cli_id'); ?>
-		<?php echo $form->textField($model,'cli_id'); ?>
+		<?php 
+			if (!(Yii::app()->user->getState('funcao') == '1')){
+				echo $form->label($model,'cli_id');
+				echo $form->textField($model,'cli_id');
+			}
+			else
+				echo $form->hiddenField($model,'cli_id');	
+		?>
 	</div>
 
 	<div class="row">

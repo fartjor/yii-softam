@@ -1,3 +1,28 @@
+<h1>Boleto #<?php echo $model->bol_codigo; ?></h1>
+
+<?php $this->widget('zii.widgets.CDetailView', array(
+	'data'=>$model,
+	'attributes'=>array(
+		array(
+			'name' => 'Nome do Cliente',
+			'value' => $model->processo->cliente->cli_nome
+		),
+		array(
+			'name' => 'Email do Cliente',
+			'value' => $model->processo->cliente->cli_email
+		),
+		'bol_valor',
+		array('name' => 'bol_vencimento', 'value' => date('d/m/Y', strtotime($model->bol_vencimento))),
+		'bol_situacao',
+		'pro_id',
+		array(
+			'name' => 'Número do Processo',
+			'value' => $model->processo->pro_numero
+		),
+	),
+)); ?>
+
+<div align="right">
 <?php
 	
 	echo CHtml::beginForm('https://pagseguro.uol.com.br/security/webpagamentos/webpagto.aspx', '',array("target" => '_blank'));
@@ -24,6 +49,7 @@
 		echo CHtml::hiddenField('cliente_tel', substr($model->processo->cliente->cli_fone1,4,4) . substr($model->processo->cliente->cli_fone1,9,4));
 		echo CHtml::hiddenField('cliente_email', $model->processo->cliente->cli_email);
 		
-		echo CHtml::submitButton("Pagar");
+		echo CHtml::submitButton("Pagar com PagSeguro");
 	echo CHtml::endForm();
 ?>
+</div>
