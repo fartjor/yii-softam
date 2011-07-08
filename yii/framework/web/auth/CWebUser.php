@@ -263,6 +263,17 @@ class CWebUser extends CApplicationComponent implements IWebUser
 	{
 		return $this->getState('__id')===null;
 	}
+	
+	public function getPermissao($array)
+	{
+		foreach($array as $permissao)
+		{
+			if ($permissao == $this->getState("funcao")){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * @return mixed the unique identifier for the user. If null, it means the user is a guest.
