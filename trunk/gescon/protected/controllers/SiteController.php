@@ -45,6 +45,9 @@ class SiteController extends Controller
 	        	$this->render('error', $error);
 	    }
 	}
+	public function actionErro(){
+		$this->render('erro', $mensagem);	
+	}
 
 	/**
 	 * Displays the contact page

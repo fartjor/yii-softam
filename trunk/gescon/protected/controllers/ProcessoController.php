@@ -31,17 +31,14 @@ class ProcessoController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','visualizar','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('novo','atualizar'),
-				'users'=>array('@'),
-			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciar','delete','novoboleto','novaacao','valorprocesso'),
-				'users'=>array('admin'),
+				'actions'=>array('gerenciarcliente','visualizar'),
+				'expression'=>"Yii::app()->user->getState('funcao') == '1'",
+			),
+			
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('gerenciar','delete','novoboleto','novaacao','valorprocesso','novo','atualizar','index','visualizar','view'),
+				'expression'=>"Yii::app()->user->getState('funcao') == '3' || Yii::app()->user->getState('funcao') == '2'",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -54,9 +51,17 @@ class ProcessoController extends Controller
 	 */
 	public function actionVisualizar()
 	{
-		$this->render('visualizar',array(
-			'model'=>$this->loadModel(),
-		));
+		if ((Yii::app()->user->getState('funcao') == 1))
+			if ($this->loadModel()->cli_id == Yii::app()->user->getState('id'))
+				$this->render('visualizar',array(
+					'model'=>$this->loadModel(),
+				));
+			else{}
+		else{
+			$this->render('visualizar',array(
+				'model'=>$this->loadModel(),
+			));	
+		}
 	}
 
 	/**
@@ -154,6 +159,19 @@ class ProcessoController extends Controller
 			$model->attributes=$_GET['Processo'];
 
 		$this->render('gerenciar',array(
+			'model'=>$model,
+		));
+	}
+	
+	public function actionGerenciarcliente()
+	{
+		$model=new Processo('search');
+		$model->unsetAttributes();  // clear any default values
+		$model->cli_id = Yii::app()->user->getState('id');
+		if(isset($_GET['Processo']))
+			$model->attributes=$_GET['Processo'];
+
+		$this->render('gerenciarcliente',array(
 			'model'=>$model,
 		));
 	}

@@ -31,17 +31,13 @@ class BoletoController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','visualizar','view', 'receber'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('novo','atualizar'),
-				'users'=>array('@'),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('gerenciar','delete', 'pagar','index','visualizar','view', 'receber','novo','atualizar'),
+				'expression'=>"Yii::app()->user->getState('funcao') == '3' || Yii::app()->user->getState('funcao') == '2'",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciar','delete', 'pagar'),
-				'users'=>array('admin'),
+				'actions'=>array('gerenciar','pagar'),
+				'expression'=>"Yii::app()->user->getState('funcao') == '1'",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -142,21 +138,41 @@ class BoletoController extends Controller
 		if(isset($_GET['Boleto']))
 			$model->attributes=$_GET['Boleto'];
 			$model->pro_id = $_GET["processo"];
-		$this->render('gerenciar',array(
-			'model'=>$model,
-		));
+		if ((Yii::app()->user->getState('funcao') == 1))
+			if ($model->processo->cli_id == Yii::app()->user->getState('id'))
+				$this->render('gerenciar',array(
+					'model'=>$model,
+				));
+			else{
+			}
+		else{
+			$this->render('gerenciar',array(
+				'model'=>$model,
+			));
+		}
 	}
 	
 	public function actionPagar($id){
 		$model = Boleto::model()->findByPk($id);
 		
-		$this->render('pagar',array(
-			'model'=>$model,
-		));	
+		if ($model){
+		if ((Yii::app()->user->getState('funcao') == 1))
+			if ($model->processo->cli_id == Yii::app()->user->getState('id'))
+				$this->render('pagar',array(
+					'model'=>$model,
+				));
+			else{
+			}
+		else{
+			$this->render('pagar',array(
+				'model'=>$model,
+			));
+		}
+		}
 	}
 	
 	public function actionReceber(){
-		$retorno_site = 'pagseguro_compraconcluida.html';  // Site para onde o usuário vai ser redirecionado ao termino do pagamento
+		$retorno_site = 'pagseguro_compraconcluida.html';  // Site para onde o usuï¿½rio vai ser redirecionado ao termino do pagamento
 		$retorno_token = '6A723FC087EC41BEB3821466690E4936'; // Token gerado pelo PagSeguro
 
 		//$retorno_host = 'localhost'; // Local da base de dados MySql
@@ -166,9 +182,9 @@ class BoletoController extends Controller
 		
 		header('Content-Type: text/html; charset=ISO-8859-1');
 
-		/* Edite este arquivo e insira suas configurações */
+		/* Edite este arquivo e insira suas configuraï¿½ï¿½es */
 
-		/* Não é necessário alterar nada desta linha para baixo */
+		/* Nï¿½o ï¿½ necessï¿½rio alterar nada desta linha para baixo */
 
 		define('TOKEN', $retorno_token);
 

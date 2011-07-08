@@ -22,20 +22,21 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="logo"><?php echo CHtml::image(Yii::app()->request->baseUrl. '/images/logo.jpg');?></div>
 	</div><!-- header -->
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'Empresas', 'url'=>array('/empresa/gerenciar/')),
-				array('label'=>'Filiais', 'url'=>array('/filial/gerenciar/')),
-				array('label'=>'Cargos', 'url'=>array('/cargo/gerenciar/')),
-				array('label'=>'Funcionários', 'url'=>array('/funcionario/gerenciar/')),
-				array('label'=>'Tipos de Processos', 'url'=>array('/tipo_processo/gerenciar/')),
-				array('label'=>'Processos', 'url'=>array('/processo/gerenciar/')),
-				array('label'=>'Clientes', 'url'=>array('/cliente/gerenciar/')),
+				array('label'=>'Empresas', 'url'=>array('/empresa/gerenciar/'),'visible'=>Yii::app()->user->getPermissao(array(2,3))),
+				array('label'=>'Filiais', 'url'=>array('/filial/gerenciar/'),'visible'=>Yii::app()->user->getPermissao(array(2,3))),
+				array('label'=>'Cargos', 'url'=>array('/cargo/gerenciar/'),'visible'=>Yii::app()->user->getPermissao(array(2,3))),
+				array('label'=>'Funcionários', 'url'=>array('/funcionario/gerenciar/'),'visible'=>Yii::app()->user->getPermissao(array(2,3))),
+				array('label'=>'Tipos de Processos', 'url'=>array('/tipo_processo/gerenciar/'),'visible'=>Yii::app()->user->getPermissao(array(2,3))),
+				array('label'=>'Processos', 'url'=>array('/processo/gerenciar/'),'visible'=>Yii::app()->user->getPermissao(array(2,3))),
+				array('label'=>'Meus Processos', 'url'=>array('/processo/gerenciarcliente/'),'visible'=>Yii::app()->user->getPermissao(array(1))),
+				array('label'=>'Clientes', 'url'=>array('/cliente/gerenciar/'),'visible'=>Yii::app()->user->getPermissao(array(2,3))),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Sair ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),

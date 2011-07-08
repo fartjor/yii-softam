@@ -31,17 +31,9 @@ class EmpresaController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','visualizar','view','carregarfiliais'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('novo','atualizar'),
-				'users'=>array('@'),
-			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciar','delete'),
-				'expression'=>"Yii::app()->user->getState('funcao') == '2'",
+				'actions'=>array('gerenciar','delete','index','visualizar','view','carregarfiliais','novo','atualizar'),
+				'expression'=>"Yii::app()->user->getState('funcao') == '3' || Yii::app()->user->getState('funcao') == '2'",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

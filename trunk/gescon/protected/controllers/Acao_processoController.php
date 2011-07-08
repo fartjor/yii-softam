@@ -33,7 +33,7 @@ class Acao_processoController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('gerenciar'),
-				'users'=>array('admin'),
+				'expression'=>"Yii::app()->user->getState('funcao') == '3' || Yii::app()->user->getState('funcao') == '2' || Yii::app()->user->getState('funcao') == '1'",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -49,9 +49,18 @@ class Acao_processoController extends Controller
 			$model->attributes=$_GET['Acao_processo'];
 			$model->pro_id = $_GET["processo"];
 
-		$this->render('gerenciar',array(
-			'model'=>$model,
-		));
+		if ((Yii::app()->user->getState('funcao') == 1))
+			if ($model->processo->cli_id == Yii::app()->user->getState('id'))
+				$this->render('gerenciar',array(
+					'model'=>$model,
+				));
+			else{
+			}
+		else{
+			$this->render('gerenciar',array(
+				'model'=>$model,
+			));
+		}
 	}
 
 	/**
