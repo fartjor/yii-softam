@@ -68,6 +68,7 @@ class Acao_processo extends CActiveRecord
 		return array(
 			'aca_id' => 'Aca',
 			'aca_tipo' => 'Tipo de Ação',
+			'aca_tipo_anterior' => 'Tipo de Ação Anterior',
 			'usu_id' => 'Usuário',
 			'aca_obs' => 'Observação',
 			'pro_id' => 'Processo',

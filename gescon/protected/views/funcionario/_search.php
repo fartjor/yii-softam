@@ -6,18 +6,10 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'fun_id'); ?>
-		<?php echo $form->textField($model,'fun_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_cpf'); ?>
-		<?php echo $form->textField($model,'fun_cpf',array('size'=>11,'maxlength'=>11)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_data_cadastro'); ?>
-		<?php echo $form->textField($model,'fun_data_cadastro'); ?>
+		<?php echo $form->labelEx($model,'fun_cpf'); ?>
+		<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'fun_cpf', 
+							'mask' => '999.999.999-99', 'htmlOptions' => array('size' => 14)));?>
+		<?php echo $form->error($model,'fun_cpf'); ?>
 	</div>
 
 	<div class="row">
@@ -31,13 +23,15 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'fun_sexo'); ?>
-		<?php echo $form->textField($model,'fun_sexo',array('size'=>1,'maxlength'=>1)); ?>
+		<?php echo $form->labelEx($model,'fun_sexo'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'fun_sexo', $model->SexoOptions); ?>
+		<?php echo $form->error($model,'fun_sexo'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'fun_estado_civil'); ?>
-		<?php echo $form->textField($model,'fun_estado_civil',array('size'=>1,'maxlength'=>1)); ?>
+		<?php echo $form->labelEx($model,'fun_estado_civil'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'fun_estado_civil', $model->EstadoOptions); ?>
+		<?php echo $form->error($model,'fun_estado_civil'); ?>
 	</div>
 
 	<div class="row">
@@ -46,53 +40,46 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'fun_email'); ?>
-		<?php echo $form->textField($model,'fun_email',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->labelEx($model,'car_id'); ?>
+		<?php echo CHtml::activeDropDownList($model,'car_id',CHtml::listData(Cargo::model()->findAll(), 
+														"car_id", "car_nome"), 
+			  											array(	'empty' => 'Selecione um Cargo -->',
+			  											  	  	'id' => 'car_id',
+														)
+			  										); ?> 
+		<?php echo $form->error($model,'car_id'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'Empresa'); ?>
+		<?php
+			$criteria = new CDbCriteria();
+			$criteria->order='emp_nome';
+		?>
+		<?php echo CHtml::dropDownList('departamento','departamento',
+											CHtml::listData(Empresa::model()->findAll($criteria), 'emp_id', 'emp_nome'),
+                                          	array(
+												'empty'=>'Selecione uma Empresa -->',
+												'ajax' => array(
+													'type'=>'GET', //request type
+													'url'=>CController::createUrl('/empresa/carregarfiliais'), //url to call.
+													'update'=>'#fil_id', //selector to update
+													'data'=>array(
+															'empresa' => 'js:this.value',
+														)
+													)
+											)
+										);?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'fun_estado'); ?>
-		<?php echo $form->textField($model,'fun_estado',array('size'=>1,'maxlength'=>1)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_obs'); ?>
-		<?php echo $form->textField($model,'fun_obs',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_data_modificacao'); ?>
-		<?php echo $form->textField($model,'fun_data_modificacao'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_data_desligamento'); ?>
-		<?php echo $form->textField($model,'fun_data_desligamento'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'car_id'); ?>
-		<?php echo $form->textField($model,'car_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fil_id'); ?>
-		<?php echo $form->textField($model,'fil_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_fone1'); ?>
-		<?php echo $form->textField($model,'fun_fone1',array('size'=>13,'maxlength'=>13)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_fone2'); ?>
-		<?php echo $form->textField($model,'fun_fone2',array('size'=>13,'maxlength'=>13)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_endereco'); ?>
-		<?php echo $form->textField($model,'fun_endereco',array('size'=>60,'maxlength'=>120)); ?>
+		<?php echo $form->labelEx($model,'fil_id'); ?>
+		<?php echo CHtml::activeDropDownList($model,'fil_id',array(), 
+			  											array(	'empty' => 'Selecione uma Filial -->',
+			  											  	  	'id' => 'fil_id',
+														)
+			  										); ?> 
+		<?php echo $form->error($model,'emp_id'); ?>
 	</div>
 
 	<div class="row">
@@ -101,19 +88,22 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'fun_uf'); ?>
-		<?php echo $form->textField($model,'fun_uf',array('size'=>2,'maxlength'=>2)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fun_cep'); ?>
-		<?php echo $form->textField($model,'fun_cep',array('size'=>9,'maxlength'=>9)); ?>
+		<?php echo $form->labelEx($model,'fun_uf'); ?>
+		<?php echo $form->dropDownList($model,'fun_uf',array(
+					'' => 'Todos','AC'=>'AC','AL'=>'AL','AM'=>'AM','AP'=>'AP','BA'=>'BA',
+					'CE'=>'CE','DF'=>'DF','ES'=>'ES','GO'=>'GO','MA'=>'MA',
+					'MG'=>'MG','MS'=>'MS','MT'=>'MT','PA'=>'PA','PB'=>'PB',
+					'PE'=>'PE','PI'=>'PI','PR'=>'PR','RJ'=>'RJ','RN'=>'RN',
+					'RO'=>'RO','RR'=>'RR','RS'=>'RS','SC'=>'SC','SE'=>'SE',
+					'SP'=>'SP','TO'=>'TO')); ?>
+		<?php echo $form->error($model,'fun_uf'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Pesquisar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
+<br /><br />
 
 </div><!-- search-form -->

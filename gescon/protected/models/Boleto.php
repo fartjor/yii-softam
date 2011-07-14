@@ -13,7 +13,7 @@
  */
 class Boleto extends CActiveRecord
 {
-	public $qtde, $data;
+	public $qtde, $data, $acoes;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Boleto the static model class
@@ -41,7 +41,7 @@ class Boleto extends CActiveRecord
 		return array(
 			array('bol_codigo, bol_valor, bol_vencimento, bol_situacao, bol_tipo, data', 'required'),
 			array('bol_codigo, pro_id', 'numerical', 'integerOnly'=>true),
-			array('bol_valor', 'length', 'max'=>9),
+			array('bol_valor', 'length', 'max'=>13),
 			array('bol_transacao', 'length', 'max'=>20),
 			array('bol_situacao', 'length', 'max'=>45),
 			array('data', 'safe'),
@@ -78,6 +78,7 @@ class Boleto extends CActiveRecord
 			'bol_tipo' => 'Tipo de Cobrança',
 			'qtde' => 'Quantidade de Parcelas',
 			'data' => 'Data do Vencimento',
+			'acoes' => 'Ações'
 		);
 	}
 	

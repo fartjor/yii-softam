@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 <h1>Gerenciar Processos</h1>
 
 <p>
-Você pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+VocÃª pode usar os operadores (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) para otimizar suas pesquisas.
 </p>
 <div align="right">
@@ -47,7 +47,10 @@ or <b>=</b>) para otimizar suas pesquisas.
 			'name' => 'tpr_id',
 			'value'=> '$data->tipo_processo->tpr_nome'
 		),
-		'pro_data_ingresso',
+		array(
+			'name' => 'pro_data_ingresso',
+			'value' => 'date("d/m/Y",strtotime($data->pro_data_ingresso))',
+		),
 		'pro_obs',
 		array(
 			'name' => 'pro_situacao',
