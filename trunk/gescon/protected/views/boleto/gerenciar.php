@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 <div align="right">
 	<?php 
 		if (Yii::app()->user->getState('funcao') == '2' || Yii::app()->user->getState('funcao') == '3')
-			echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl. '/images/novo.jpg'),Yii::app()->request->baseUrl . '/processo/novaacao/processo/'. $model->pro_id); 
+			echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl. '/images/novo.jpg'),Yii::app()->request->baseUrl . '/processo/novoboleto/processo/'. $model->pro_id); 
 	?>
 </div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
@@ -22,7 +22,7 @@ $this->breadcrumbs=array(
 		'bol_vencimento',
 		'bol_situacao',
 		array(
-			'name' => 'Ações',
+			'name' => 'acoes',
 			'type' => 'raw',
 			'value' => 'CHtml::link(CHtml::encode("Pagar com Pagseguro"), CHtml::encode("../../pagar/$data->bol_codigo"))',
 		),

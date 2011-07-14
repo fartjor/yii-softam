@@ -155,8 +155,10 @@ class ProcessoController extends Controller
 	{
 		$model=new Processo('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Processo']))
+		if(isset($_GET['Processo'])){
 			$model->attributes=$_GET['Processo'];
+			$model->pro_data_ingresso = implode('-',array_reverse(explode('/',$_GET['Processo']['pro_data_ingresso'])));
+		}
 
 		$this->render('gerenciar',array(
 			'model'=>$model,

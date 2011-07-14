@@ -1,6 +1,6 @@
 <?php
 
-	if (!Yii::app()->user->getState('funcao') == '1'){
+	if (!(Yii::app()->user->getState('funcao') == '1')){
 		$this->breadcrumbs=array(
 			'Processos'=>array('processo/gerenciar'),
 			$model->pro_id=>array('processo/visualizar/' . $model->pro_id),
@@ -27,17 +27,17 @@
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
 		array(
-			'name' => 'Tipo de Ação',
+			'name' => 'aca_tipo',
 			'value' => '$data->getTipoText()'
 		),
 		array(
-			'name' => 'Tipo de Ação Anterior',
+			'name' => 'aca_tipo_anterior',
 			'value' => '$data->getTipoAnteriorText()'
 		),
 		'usu_id',
 		'aca_obs',
 		array(
-			'name' => 'Data da Ação',
+			'name' => 'aca_data',
 			'value' => '$data->getData()'
 		),
 	),

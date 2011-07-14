@@ -96,7 +96,7 @@ class Funcionario extends CActiveRecord
 			'fun_id' => 'Código',
 			'fun_cpf' => 'CPF',
 			'fun_data_cadastro' => 'Data de Cadastro',
-			'fun_numero_funcionario' => 'Numero do Funcionário',
+			'fun_numero_funcionario' => 'Número do Funcionário',
 			'fun_nome' => 'Nome',
 			'fun_sexo' => 'Sexo',
 			'fun_estado_civil' => 'Estado Civil',
@@ -139,7 +139,7 @@ class Funcionario extends CActiveRecord
             'S'=>'Solteiro',
             'C'=>'Casado',
         	'D'=>'Divorciado',
-        	'V'=>'Vi�vo',
+        	'V'=>'Vi�vo',
      	);
      }
 	/**

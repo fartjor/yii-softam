@@ -1,5 +1,5 @@
 <?php
-	if (!Yii::app()->user->getState('funcao') == '1'){
+	if (!(Yii::app()->user->getState('funcao') == '1')){
 		$this->breadcrumbs=array(
 			'Processos'=>array('gerenciar'),
 			$model->pro_id,

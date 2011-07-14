@@ -151,6 +151,7 @@ class Processo extends CActiveRecord
 
 		$criteria->compare('tpr_id',$this->tpr_id);
 
+
 		return new CActiveDataProvider('Processo', array(
 			'criteria'=>$criteria,
 		));

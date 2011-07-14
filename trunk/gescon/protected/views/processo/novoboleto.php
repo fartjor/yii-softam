@@ -41,6 +41,7 @@ $this->breadcrumbs=array(
     					// additional javascript options for the date picker plugin
     					'options'=>array(
         					'showAnim'=>'fold',
+							'dateFormat' => Yii::app()->getLocale()->getDateFormat(),
     					),
     					'htmlOptions'=>array(
         					'style'=>'height:20px; width:120px;'
@@ -64,7 +65,7 @@ $this->breadcrumbs=array(
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'bol_valor'); ?>
-		<?php echo $form->textField($model,'bol_valor',array('size'=>10, 'maxlength'=>10,'id' => 'valor')); ?>
+		<?php echo $form->textField($model,'bol_valor',array('size'=>15, 'maxlength'=>15,'id' => 'valor')); ?>
 		<?php echo $form->error($model,'bol_valor'); ?>
 	</div>
 	
