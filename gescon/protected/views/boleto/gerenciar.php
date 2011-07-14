@@ -14,6 +14,24 @@ $this->breadcrumbs=array(
 			echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl. '/images/novo.jpg'),Yii::app()->request->baseUrl . '/processo/novoboleto/processo/'. $model->pro_id); 
 	?>
 </div>
+<?php 
+	if (Yii::app()->user->getState('funcao') == '1')
+		$acao = 'CHtml::link(
+							CHtml::image(Yii::app()->request->baseUrl. "/images/pagar.png", "Pagar com PagSeguro", 
+								array("title" => "Pagar com PagSeguro")
+							), 
+							CHtml::encode("../../pagar/$data->bol_codigo")
+						)';
+	else
+		$acao = 'CHtml::link(
+							CHtml::image(Yii::app()->request->baseUrl. "/images/excluir.png", "Excluir Boleto", 
+								array("title" => "Excluir Boleto")
+							), 
+							CHtml::encode("../../pagar/$data->bol_codigo")
+						)';	
+?>
+
+
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'boleto-grid',
 	'dataProvider'=>$model->search(),
@@ -24,7 +42,8 @@ $this->breadcrumbs=array(
 		array(
 			'name' => 'acoes',
 			'type' => 'raw',
-			'value' => 'CHtml::link(CHtml::encode("Pagar com Pagseguro"), CHtml::encode("../../pagar/$data->bol_codigo"))',
+			'value' => $acao,
+			'htmlOptions'=>array('align'=>'center'),
 		),
 	),
 )); 
