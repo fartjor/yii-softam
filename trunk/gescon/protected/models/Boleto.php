@@ -103,8 +103,8 @@ class Boleto extends CActiveRecord
     
 	public function beforeValidate(){
 		$this->bol_valor = $this->tiraMoeda($this->bol_valor);	
-		$this->bol_vencimento = date('Y-m-d', strtotime($this->bol_vencimento));
-		$this->bol_vencimento = '2011-06-21';
+		$this->bol_vencimento = $this->dataMysql($this->bol_vencimento);
+		//$this->bol_vencimento = '2011-06-21';
 		
 		$this->bol_transacao = '';
 		
@@ -117,6 +117,12 @@ class Boleto extends CActiveRecord
 		
 		return parent::beforeValidate();
 	}
+	
+	public function afterFind(){
+		$this->bol_vencimento = $this->dataBR($this->bol_vencimento);
+		
+		return parent::afterFind();
+	}
     
 	public function tiraMoeda($valor){
 		$valor = substr($valor, 3);
@@ -125,6 +131,14 @@ class Boleto extends CActiveRecord
 		$valor = str_replace($pontos, "", $valor);
 		$valor = str_replace($virgula, ".", $valor);
 		return $valor;
+	}
+	
+	public function dataBR($data){
+		return implode("/",array_reverse(explode("-",$data)));	
+	}
+	
+	public function dataMysql($data){
+		return implode("-",array_reverse(explode("/",$data)));	
 	}
 
 	/**

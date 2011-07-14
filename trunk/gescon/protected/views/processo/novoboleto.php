@@ -41,7 +41,7 @@ $this->breadcrumbs=array(
     					// additional javascript options for the date picker plugin
     					'options'=>array(
         					'showAnim'=>'fold',
-							'dateFormat' => Yii::app()->getLocale()->getDateFormat(),
+							'dateFormat' => 'dd/mm/yy',
     					),
     					'htmlOptions'=>array(
         					'style'=>'height:20px; width:120px;'
