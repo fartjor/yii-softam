@@ -24,6 +24,12 @@ $this->breadcrumbs=array(
 						)';
 	else
 		$acao = 'CHtml::link(
+							CHtml::image(Yii::app()->request->baseUrl. "/images/pagar.png", "Pagar com PagSeguro", 
+								array("title" => "Pagar com PagSeguro")
+							), 
+							CHtml::encode("../../pagar/$data->bol_codigo")
+						). 
+				CHtml::link(
 							CHtml::image(Yii::app()->request->baseUrl. "/images/excluir.png", "Excluir Boleto", 
 								array("title" => "Excluir Boleto")
 							), 
