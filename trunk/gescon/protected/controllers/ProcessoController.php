@@ -32,12 +32,12 @@ class ProcessoController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciarcliente','visualizar'),
+				'actions'=>array('gerenciarcliente','visualizar', 'simulacaoAdmin'),
 				'expression'=>"Yii::app()->user->getState('funcao') == '1'",
 			),
 			
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('gerenciar','delete','novoboleto','novaacao','valorprocesso','novo','atualizar','index','visualizar','view'),
+				'actions'=>array('gerenciar','delete','novoboleto','novaacao','valorprocesso','novo','atualizar','index','visualizar','view', 'simulacaoAdmin'),
 				'expression'=>"Yii::app()->user->getState('funcao') == '3' || Yii::app()->user->getState('funcao') == '2'",
 			),
 			array('deny',  // deny all users
@@ -245,6 +245,59 @@ class ProcessoController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 */
+	
+	public function actionSimulacaoAdmin($parcela){
+		$model = Processo::model();
+		
+		$parcela = $model->tiraMoeda($parcela) / 2 * 100;
+		
+		echo '<h4>Simulação</h4>';
+		echo '<div class="row">';
+			echo CHtml::activeLabelEx($model,'pro_car_entrada');
+			echo CHtml::activeTextField($model,'pro_car_entrada',array('size' => 20, 'id' => 'pro_car_entrada', 'value' => $parcela));
+			echo CHtml::error($model,'pro_car_entrada');
+		echo '</div>';
+		echo '<div class="row">';
+			echo CHtml::activeLabelEx($model,'pro_car_mensalidade');
+			echo CHtml::activeTextField($model,'pro_car_mensalidade',array('size' => 20, 'id' => 'pro_car_mensalidade'));
+			echo CHtml::error($model,'pro_car_mensalidade');
+		echo '</div>';
+		echo '<div class="row">';
+			echo CHtml::activeLabelEx($model,'pro_car_valor_juizo');
+			echo CHtml::activeTextField($model,'pro_car_valor_juizo',array('size' => 20, 'id' => 'pro_car_valor_juizo'));
+			echo CHtml::error($model,'pro_car_valor_juizo');
+		echo '</div>';
+		echo '<div class="row">';
+			echo CHtml::activeLabelEx($model,'pro_car_economia');
+			echo CHtml::activeTextField($model,'pro_car_economia',array('size' => 20, 'id' => 'pro_car_economia'));
+			echo CHtml::error($model,'pro_car_economia');
+		echo '</div>';
+		echo "<script>
+				$('#simulacao').css('background-color', '#EEE');
+				$('#pro_car_entrada').priceFormat({
+				    prefix: 'R$ ',
+				    centsSeparator: ',',
+				    thousandsSeparator: '.'
+				});
+				$('#pro_car_valor_juizo').priceFormat({
+				    prefix: 'R$ ',
+				    centsSeparator: ',',
+				    thousandsSeparator: '.'
+				});
+				$('#pro_car_mensalidade').priceFormat({
+				    prefix: 'R$ ',
+				    centsSeparator: ',',
+				    thousandsSeparator: '.'
+				});
+				$('#pro_car_economia').priceFormat({
+				    prefix: 'R$ ',
+				    centsSeparator: ',',
+				    thousandsSeparator: '.'
+				});
+			</script>";
+	}
+	
+	
 	public function loadModel()
 	{
 		if($this->_model===null)

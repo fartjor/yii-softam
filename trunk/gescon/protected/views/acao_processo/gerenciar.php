@@ -16,6 +16,7 @@
 	}
 ?>
 <h1>Ações do Processo #<?php echo $model->pro_id;?></h1>
+<h4>Cliente: <?php echo $model->processo->cliente->cli_nome;?></h4>
 <div align="right">
 	<?php 
 		if (Yii::app()->user->getState('funcao') == '2' || Yii::app()->user->getState('funcao') == '3')

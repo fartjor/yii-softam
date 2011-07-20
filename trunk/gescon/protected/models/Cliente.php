@@ -81,6 +81,7 @@ class Cliente extends CActiveRecord
 		return array(
 			'filial_clientes' => array(self::HAS_MANY, 'FilialCliente', 'cli_id'),
 			'processos' => array(self::HAS_MANY, 'Processo', 'cli_id'),
+			'filial' => array(self::BELONGS_TO, 'Filial', 'fil_id'),
 		);
 	}
 
@@ -109,7 +110,8 @@ class Cliente extends CActiveRecord
 			'cli_uf' => 'UF',
 			'cli_cep' => 'CEP',
 			'cli_situacao' => 'Situação',
-			'cli_bairro' => 'Bairro'
+			'cli_bairro' => 'Bairro',
+			'fil_id' => 'Filial',
 		);
 	}
 

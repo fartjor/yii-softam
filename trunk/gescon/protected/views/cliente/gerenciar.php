@@ -50,6 +50,10 @@ or <b>=</b>) para otimizar suas pesquisas.
 		'cli_cidade',
 		'cli_uf',
 		array(
+			'name' => 'fil_id',
+			'value' => '$data->filial->fil_nome',
+		),
+		array(
 			'name' => 'cli_situacao',
 			'value' => '$data->getSituacaoText()',
 		),
