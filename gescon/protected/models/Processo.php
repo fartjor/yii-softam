@@ -85,7 +85,7 @@ class Processo extends CActiveRecord
 			'pro_car_ano' => 'Ano',
 			'pro_car_modelo' => 'Modelo do Veículo',
 			'pro_car_marca' => 'Marca do Veículo',
-			'pro_car_valor' => 'Valor do Veículo',
+			'pro_car_valor' => 'Valor Financiado',
 			'pro_car_qtde_prestacoes' => 'Quantidade de Parcelas pagas',
 			'pro_car_valor_parcela' => 'Valor da Parcela',
 			'pro_car_chaci' => 'Chaci',

@@ -231,3 +231,11 @@ div.search-form
 	background-image: url("../images/contratos.jpg");
 	height: 506px;
 }
+
+h4{
+	color: gray;
+}
+#simulacao{
+	padding: 10px;
+	padding-left: 20px;	
+}

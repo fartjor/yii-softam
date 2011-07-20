@@ -8,6 +8,38 @@
 	<p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'Empresa'); ?>
+		<?php
+			$criteria = new CDbCriteria();
+			$criteria->order='emp_nome';
+		?>
+		<?php echo CHtml::dropDownList('departamento','departamento',
+											CHtml::listData(Empresa::model()->findAll($criteria), 'emp_id', 'emp_nome'),
+                                          	array(
+												'empty'=>'Selecione uma Empresa -->',
+												'ajax' => array(
+													'type'=>'GET', //request type
+													'url'=>CController::createUrl('/empresa/carregarfiliais'), //url to call.
+													'update'=>'#fil_id', //selector to update
+													'data'=>array(
+															'empresa' => 'js:this.value',
+														)
+													)
+											)
+										);?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'fil_id'); ?>
+		<?php echo CHtml::activeDropDownList($model,'fil_id',array(), 
+			  											array(	'empty' => 'Selecione uma Filial -->',
+			  											  	  	'id' => 'fil_id',
+														)
+			  										); ?> 
+		<?php echo $form->error($model,'emp_id'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cli_cpf'); ?>

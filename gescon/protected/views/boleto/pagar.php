@@ -1,4 +1,5 @@
 <h1>Boleto #<?php echo $model->bol_codigo; ?></h1>
+<h4>Cliente: <?php echo $model->processo->cliente->cli_nome;?></h4>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -16,7 +17,7 @@
 		'bol_situacao',
 		'pro_id',
 		array(
-			'name' => 'Número do Processo',
+			'name' => 'pro_id',
 			'value' => $model->processo->pro_numero
 		),
 	),

@@ -31,9 +31,13 @@ $this->breadcrumbs=array(
 		'cli_cidade',
 		'cli_uf',
 		'cli_cep',
+		array(
+			'name' => 'fil_id',
+			'value' => $model->filial->fil_nome,
+		),
 		'cli_obs',
 		array(
-			'name' => 'Situação',
+			'name' => 'cli_situacao',
 			'value' => $model->getSituacaoText(),
 		),
 		array(

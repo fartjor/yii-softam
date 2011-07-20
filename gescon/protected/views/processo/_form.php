@@ -33,11 +33,10 @@
 			  										); ?>
 		<?php echo $form->error($model,'tpr_id'); ?>
 	</div>
-    <?php $this->beginWidget('ext.coolfieldset.JCollapsibleFieldset', array(
-        'collapsed'=>false,
-        'legend'=>'Dados do Veículo',
-        'legendHtmlOptions'=>array('title'=>'Clique aqui para inserir dados do Veículo!')
-    )); ?>
+	<h4>Dados do Veículo</h4>
+    <table width="100%">
+    <tr>
+    <td width="50%">
 		<div class="row">
 			<?php echo $form->labelEx($model,'pro_car_placa'); ?>
 			<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'pro_car_placa', 
@@ -76,29 +75,46 @@
 			<?php echo $form->error($model,'pro_car_valor'); ?>
 		</div>
 		<div class="row">
+			<?php echo $form->labelEx($model,'pro_car_valor_parcela'); ?>
+			<?php echo $form->textField($model,'pro_car_valor_parcela',array('size' => 20, 'id' => 'pro_car_valor_parcela')); ?>
+			<?php echo $form->error($model,'pro_car_valor_parcela'); ?>
+		</div>
+		<div class="row">
 			<?php echo $form->labelEx($model,'pro_car_qtde_prestacoes'); ?>
 			<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'pro_car_qtde_prestacoes', 
 							'mask' => '99', 'htmlOptions' => array('size' => 2)));?>
 			<?php echo $form->error($model,'pro_car_qtde_prestacoes'); ?>
 		</div>
 		<div class="row">
-			<?php echo $form->labelEx($model,'pro_car_valor_parcela'); ?>
-			<?php echo $form->textField($model,'pro_car_valor_parcela',array('size' => 20, 'id' => 'pro_car_valor_parcela')); ?>
-			<?php echo $form->error($model,'pro_car_valor_parcela'); ?>
+			<?php echo $form->labelEx($model,'pro_car_qtde_prestacoes_pagas'); ?>
+			<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'pro_car_qtde_prestacoes_pagas', 
+							'mask' => '99', 'htmlOptions' => array('size' => 2)));?>
+			<?php echo $form->error($model,'pro_car_qtde_prestacoes_pagas'); ?>
 		</div>
-    <?php $this->endWidget('ext.coolfieldset.JCollapsibleFieldset'); ?><!-- collabsible fieldset -->
-	
+		<div class="row buttons">
+			<?php echo CHtml::ajaxButton('Calcular', 
+						array('processo/simulacaoAdmin'),
+						array('data' => array('parcela' => 'R$ 20,00'), 'update' => '#simulacao') 
+				); ?>
+		</div>
+</td>
+	<td width="50%">
+		<div id="simulacao">
+		
+		</div>
+	</td></tr></table>
+		
 	<div class="row">
 		<?php echo $form->labelEx($model,'pro_obs'); ?>
 		<?php echo $form->textArea($model,'pro_obs',array('cols'=>45,'rows' => 4, 'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'pro_obs'); ?>
 	</div>
-
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar' : 'Salvar'); ?>
-	</div>
-
+	</div>    
 <?php $this->endWidget(); ?>
+	
 </div><!-- form -->
 <script>
 $('#pro_car_valor').priceFormat({
