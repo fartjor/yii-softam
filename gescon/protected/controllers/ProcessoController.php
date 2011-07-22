@@ -51,8 +51,9 @@ class ProcessoController extends Controller
 	 */
 	public function actionVisualizar()
 	{
+		$cliente = Cliente::model()->findByAttributes(array('usu_id' => Yii::app()->user->getState('id')));
 		if ((Yii::app()->user->getState('funcao') == 1))
-			if ($this->loadModel()->cli_id == Yii::app()->user->getState('id'))
+			if ($this->loadModel()->cli_id == $cliente->cli_id)
 				$this->render('visualizar',array(
 					'model'=>$this->loadModel(),
 				));
@@ -169,7 +170,10 @@ class ProcessoController extends Controller
 	{
 		$model=new Processo('search');
 		$model->unsetAttributes();  // clear any default values
-		$model->cli_id = Yii::app()->user->getState('id');
+		
+		$cliente = Cliente::model()->findByAttributes(array('usu_id' => Yii::app()->user->getState('id')));
+		
+		$model->cli_id = $cliente->cli_id;
 		if(isset($_GET['Processo']))
 			$model->attributes=$_GET['Processo'];
 
@@ -231,6 +235,27 @@ class ProcessoController extends Controller
 					$this->redirect(array('../boleto/gerenciar','processo'=>$processo));
 				}	
 			}
+			else{
+				for ($i=0; $i<=$_POST["Boleto"]["qtde"] - 1; $i++){
+					$model = new Boleto;
+					$model->bol_valor = $_POST["Boleto"]["bol_valor"];
+					$data = $model->dataMysql($_POST["data"]);
+					$data = date("d/m/Y",strtotime(date("Y-m-d", strtotime($data)) . " +" . $i ." month"));
+					$model->bol_vencimento = $model->dataMysql($data);
+					$model->bol_situacao = 'Boleto Gerado';
+					$model->pro_id = $processo;
+					$model->bol_tipo = $_POST["Boleto"]["bol_tipo"];
+					if($model->validate())
+						$model->bol_tipo = $_POST["Boleto"]["bol_tipo"];
+					else
+						$model->bol_tipo = $_POST["Boleto"]["bol_tipo"];
+				
+					if($model->save(false)){
+						//
+					}	
+				}
+				$this->redirect(array('../boleto/gerenciar','processo'=>$processo));	
+			}
 		}
 		else
 		{
@@ -246,30 +271,33 @@ class ProcessoController extends Controller
 	 * If the data model is not found, an HTTP exception will be raised.
 	 */
 	
-	public function actionSimulacaoAdmin($parcela){
+	public function actionSimulacaoAdmin($parcela, $financiado, $prestacoes, $pagas){
 		$model = Processo::model();
 		
-		$parcela = $model->tiraMoeda($parcela) / 2 * 100;
+		$entrada = $model->tiraMoeda($parcela) / 2 * 100;
+		$mensalidade = $model->tiraMoeda($parcela) / 10 * 100;
+		$juizo = $model->tiraMoeda($parcela) / 2 * 100;
 		
+		$economia = $model->tiraMoeda($financiado) * 100 - $mensalidade * ($prestacoes - $pagas) - $juizo * ($prestacoes - $pagas) - $entrada - $model->tiraMoeda($parcela) * $pagas * 100; 
 		echo '<h4>Simulação</h4>';
 		echo '<div class="row">';
 			echo CHtml::activeLabelEx($model,'pro_car_entrada');
-			echo CHtml::activeTextField($model,'pro_car_entrada',array('size' => 20, 'id' => 'pro_car_entrada', 'value' => $parcela));
+			echo CHtml::activeTextField($model,'pro_car_entrada',array('size' => 20, 'id' => 'pro_car_entrada', 'value' => $entrada));
 			echo CHtml::error($model,'pro_car_entrada');
 		echo '</div>';
 		echo '<div class="row">';
 			echo CHtml::activeLabelEx($model,'pro_car_mensalidade');
-			echo CHtml::activeTextField($model,'pro_car_mensalidade',array('size' => 20, 'id' => 'pro_car_mensalidade'));
+			echo CHtml::activeTextField($model,'pro_car_mensalidade',array('size' => 20, 'id' => 'pro_car_mensalidade', 'value' => $mensalidade));
 			echo CHtml::error($model,'pro_car_mensalidade');
 		echo '</div>';
 		echo '<div class="row">';
 			echo CHtml::activeLabelEx($model,'pro_car_valor_juizo');
-			echo CHtml::activeTextField($model,'pro_car_valor_juizo',array('size' => 20, 'id' => 'pro_car_valor_juizo'));
+			echo CHtml::activeTextField($model,'pro_car_valor_juizo',array('size' => 20, 'id' => 'pro_car_valor_juizo', 'value' => $juizo));
 			echo CHtml::error($model,'pro_car_valor_juizo');
 		echo '</div>';
 		echo '<div class="row">';
 			echo CHtml::activeLabelEx($model,'pro_car_economia');
-			echo CHtml::activeTextField($model,'pro_car_economia',array('size' => 20, 'id' => 'pro_car_economia'));
+			echo CHtml::activeTextField($model,'pro_car_economia',array('size' => 20, 'id' => 'pro_car_economia', 'value' => $economia));
 			echo CHtml::error($model,'pro_car_economia');
 		echo '</div>';
 		echo "<script>

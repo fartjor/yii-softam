@@ -88,6 +88,17 @@ class Cargo extends CActiveRecord
             'I'=>'Inativo',
      	);
      }
+     
+	public function scopes(){
+		return array(
+    		'ativos'=>array(
+          		'condition'=>'car_ativo = "A"',
+    		),
+			'inativos'=>array(
+          		'condition'=>'car_ativo = "I"',
+    		),
+		);	
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

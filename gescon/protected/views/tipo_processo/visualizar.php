@@ -25,7 +25,7 @@ $this->breadcrumbs=array(
 			'value' => date('d/m/Y H:i:s', strtotime($model->tpr_data_ingresso))
 		),
 		array(
-			'name' => 'Data de modificação',
+			'name' => 'tpr_data_modificacao',
 			'value' => $data_modificacao	
 		),
 	),

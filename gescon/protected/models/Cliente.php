@@ -30,6 +30,7 @@ class Cliente extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return Cliente the static model class
 	 */
+	public $usuario;
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -51,7 +52,7 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cli_cpf, cli_data_cadastro, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_fone1, cli_endereco, cli_cidade, cli_uf, cli_bairro', 'required'),
+			array('cli_cpf, cli_data_cadastro, cli_nome, cli_sexo, cli_estado_civil, cli_profissao, cli_fone1, cli_endereco, cli_cidade, cli_uf, cli_bairro, usuario, fil_id', 'required'),
 			array('cli_cpf', 'length', 'max'=>14),
 			array('cli_nome, cli_profissao', 'length', 'max'=>100),
 			array('cli_sexo, cli_estado_civil', 'length', 'max'=>1),
@@ -112,6 +113,7 @@ class Cliente extends CActiveRecord
 			'cli_situacao' => 'Situação',
 			'cli_bairro' => 'Bairro',
 			'fil_id' => 'Filial',
+			'usuario' => 'Usuário',
 		);
 	}
 
@@ -153,6 +155,17 @@ class Cliente extends CActiveRecord
             'I'=>'Inativa',
      	);
     }
+    
+	public function scopes(){
+		return array(
+    		'ativos'=>array(
+          		'condition'=>'cli_situacao = "A"',
+    		),
+			'inativos'=>array(
+          		'condition'=>'cli_situacao = "I"',
+    		),
+		);	
+	}
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

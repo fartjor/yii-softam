@@ -1,3 +1,5 @@
+<?php Yii::app()->clientScript->registerScript('jquery',CClientScript::POS_READY);?>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl. '/js/price.js' ?>"></script>
 <?php
 	if (!(Yii::app()->user->getState('funcao') == '1')){
 		$this->breadcrumbs=array(
@@ -45,9 +47,13 @@
 		'pro_car_ano',
 		'pro_car_modelo',
 		'pro_car_marca',
-		'pro_car_valor',
+		array('type' => 'raw','name'  => 'pro_car_valor','value'  => '<div id="pro_car_valor">' . $model->Moeda($model->pro_car_valor) . '</div>', 'id' => 'pro_car_valor'),
 		'pro_car_qtde_prestacoes',
-		'pro_car_valor_parcela',
+		'pro_car_qtde_prestacoes_pagas',
+		array('name' => 'pro_car_valor_juizo', 'value' => $model->Moeda($model->pro_car_valor_juizo)),
+		array('name' => 'pro_car_entrada', 'value' => $model->Moeda($model->pro_car_entrada)),
+		array('name' => 'pro_car_mensalidade', 'value' => $model->Moeda($model->pro_car_mensalidade)),
+		array('name' => 'pro_car_economia', 'value' => $model->Moeda($model->pro_car_economia)),
 		array(
 			'name' => 'pro_situacao',
 			'value' => $model->getSituacaoText()	
@@ -63,3 +69,10 @@
 		
 	),
 )); ?>
+<script>
+$('#pro_car_valor').priceFormat({
+    prefix: 'R$ ',
+    centsSeparator: ',',
+    thousandsSeparator: '.'
+});
+</script>	

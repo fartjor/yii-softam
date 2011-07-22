@@ -45,12 +45,14 @@ class Acao_processoController extends Controller
 	{
 		$model=new Acao_processo('search');
 		$model->unsetAttributes();  // clear any default values
+		$cliente = Cliente::model()->findByAttributes(array('usu_id' => Yii::app()->user->getState('id')));
+	
 		if(isset($_GET['Acao_processo']))
 			$model->attributes=$_GET['Acao_processo'];
 			$model->pro_id = $_GET["processo"];
 
 		if ((Yii::app()->user->getState('funcao') == 1))
-			if ($model->processo->cli_id == Yii::app()->user->getState('id'))
+			if ($model->processo->cli_id == $cliente->cli_id)
 				$this->render('gerenciar',array(
 					'model'=>$model,
 				));

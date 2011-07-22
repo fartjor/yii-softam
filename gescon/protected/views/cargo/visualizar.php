@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 		'car_id',
 		'car_nome',
 		array(
-			'name' => 'Situação',
+			'name' => 'car_ativo',
 			'value' => $model->getAtivoText()	
 		),
 		'car_obs',
@@ -29,7 +29,7 @@ $this->breadcrumbs=array(
 			'value' => date('d/m/Y H:i:s', strtotime($model->car_data_ingresso))
 		),
 		array(
-			'name' => 'Data de modificação',
+			'name' => 'car_data_modificacao',
 			'value' => $data_modificacao	
 		),
 	),

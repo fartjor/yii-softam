@@ -54,7 +54,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'car_id'); ?>
-		<?php echo CHtml::activeDropDownList($model,'car_id',CHtml::listData(Cargo::model()->findAll(), 
+		<?php echo CHtml::activeDropDownList($model,'car_id',CHtml::listData(Cargo::model()->ativos()->findAll(), 
 														"car_id", "car_nome"), 
 			  											array(	'empty' => 'Selecione um Cargo -->',
 			  											  	  	'id' => 'car_id',
@@ -70,7 +70,7 @@
 			$criteria->order='emp_nome';
 		?>
 		<?php echo CHtml::dropDownList('departamento','departamento',
-											CHtml::listData(Empresa::model()->findAll($criteria), 'emp_id', 'emp_nome'),
+											CHtml::listData(Empresa::model()->ativos()->findAll($criteria), 'emp_id', 'emp_nome'),
                                           	array(
 												'empty'=>'Selecione uma Empresa -->',
 												'ajax' => array(

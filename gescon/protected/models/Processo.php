@@ -40,13 +40,15 @@ class Processo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pro_data_ingresso, cli_id, tpr_id pro_car_placa, 
+			array('pro_data_ingresso, cli_id, tpr_id, pro_car_placa, 
 				   pro_car_renavan, pro_car_ano, pro_car_modelo, pro_car_marca, pro_car_valor
-				   pro_car_qtde_prestacoes, pro_car_valor_parcela, pro_car_chaci', 'required'),
+				   pro_car_qtde_prestacoes, pro_car_valor_parcela,pro_car_qtde_prestacoes_pagas,pro_car_chaci,
+			pro_car_entrada, pro_car_mensalidade, pro_car_valor_juizo, pro_car_economia', 'required'),
 			array('cli_id, tpr_id', 'numerical', 'integerOnly'=>true),
 			array('pro_numero', 'numerical'),
 			array('pro_obs', 'length', 'max'=>255),
-			array('pro_data_modificacao, pro_data_desativacao', 'safe'),
+			array('pro_data_modificacao, pro_data_desativacao, pro_car_qtde_prestacoes, pro_car_qtde_prestacoes_pagas, pro_car_valor_parcela,
+			pro_car_entrada, pro_car_mensalidade, pro_car_valor_juizo, pro_car_economia', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('pro_id, pro_numero, pro_data_ingresso, pro_obs, pro_data_modificacao, pro_data_desativacao, cli_id, tpr_id', 'safe', 'on'=>'search'),
@@ -86,8 +88,13 @@ class Processo extends CActiveRecord
 			'pro_car_modelo' => 'Modelo do Veículo',
 			'pro_car_marca' => 'Marca do Veículo',
 			'pro_car_valor' => 'Valor Financiado',
-			'pro_car_qtde_prestacoes' => 'Quantidade de Parcelas pagas',
+			'pro_car_qtde_prestacoes' => 'Quantidade de Prestações',
+			'pro_car_qtde_prestacoes_pagas' => 'Quantidade de Prestações pagas',
 			'pro_car_valor_parcela' => 'Valor da Parcela',
+			'pro_car_entrada' => 'Honorários de Entrada',
+			'pro_car_mensalidade' => 'Honorário Mensalidade',
+			'pro_car_valor_juizo' => 'Valor da Parcela em Juízo',
+			'pro_car_economia' => 'Previsão de Economia',
 			'pro_car_chaci' => 'Chaci',
 			'pro_situacao' => 'Situação'
 		);
@@ -112,6 +119,10 @@ class Processo extends CActiveRecord
 	public function beforeValidate(){
 		$this->pro_car_valor = $this->tiraMoeda($this->pro_car_valor);
 		$this->pro_car_valor_parcela = $this->tiraMoeda($this->pro_car_valor_parcela);
+		$this->pro_car_entrada = $this->tiraMoeda($this->pro_car_entrada);
+		$this->pro_car_valor_juizo = $this->tiraMoeda($this->pro_car_valor_juizo);
+		$this->pro_car_mensalidade = $this->tiraMoeda($this->pro_car_mensalidade);
+		$this->pro_car_economia = $this->tiraMoeda($this->pro_car_economia);
 		
 		return parent::beforeValidate();
 	}
@@ -124,6 +135,15 @@ class Processo extends CActiveRecord
 		$valor = str_replace($virgula, ".", $valor);
 		return $valor;
 	}
+	
+	public function dataMysql($data){
+		return implode("-",array_reverse(explode("/",$data)));	
+	}
+	
+	public function Moeda($valor){
+		return 'R$ '. number_format($valor, 2, ',' , '.');
+	}
+	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

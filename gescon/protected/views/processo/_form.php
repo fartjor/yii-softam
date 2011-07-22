@@ -1,6 +1,5 @@
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl. '/js/price.js' ?>">
-
-</script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl. '/js/price.js' ?>"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl. '/js/jquery.alphanumeric.js' ?>"></script>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -14,7 +13,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cli_id'); ?>
-		<?php echo CHtml::activeDropDownList($model,'cli_id',CHtml::listData(Cliente::model()->findAll(), 
+		<?php echo CHtml::activeDropDownList($model,'cli_id',CHtml::listData(Cliente::model()->ativos()->findAll(), 
 														"cli_id", "cli_nome"), 
 			  											array(	'empty' => 'Selecione um Cliente -->',
 			  											  	  	'id' => 'cli_id',
@@ -25,7 +24,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tpr_id'); ?>
-		<?php echo CHtml::activeDropDownList($model,'tpr_id',CHtml::listData(Tipo_processo::model()->findAll(), 
+		<?php echo CHtml::activeDropDownList($model,'tpr_id',CHtml::listData(Tipo_processo::model()->ativos()->findAll(), 
 														"tpr_id", "tpr_nome"), 
 			  											array(	'empty' => 'Selecione um Tipo de Processo -->',
 			  											  	  	'id' => 'tpr_id',
@@ -81,26 +80,77 @@
 		</div>
 		<div class="row">
 			<?php echo $form->labelEx($model,'pro_car_qtde_prestacoes'); ?>
-			<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'pro_car_qtde_prestacoes', 
-							'mask' => '99', 'htmlOptions' => array('size' => 2)));?>
+			<?php echo $form->textField($model,'pro_car_qtde_prestacoes',array('size' => 20, 'id' => 'pro_car_qtde_prestacoes')); ?>
 			<?php echo $form->error($model,'pro_car_qtde_prestacoes'); ?>
 		</div>
 		<div class="row">
 			<?php echo $form->labelEx($model,'pro_car_qtde_prestacoes_pagas'); ?>
-			<?php $this->widget('CMaskedTextField', array('model' => $model, 'attribute' => 'pro_car_qtde_prestacoes_pagas', 
-							'mask' => '99', 'htmlOptions' => array('size' => 2)));?>
+			<?php echo $form->textField($model,'pro_car_qtde_prestacoes_pagas',array('size' => 20, 'id' => 'pro_car_qtde_prestacoes_pagas')); ?>
 			<?php echo $form->error($model,'pro_car_qtde_prestacoes_pagas'); ?>
 		</div>
 		<div class="row buttons">
 			<?php echo CHtml::ajaxButton('Calcular', 
 						array('processo/simulacaoAdmin'),
-						array('data' => array('parcela' => 'R$ 20,00'), 'update' => '#simulacao') 
-				); ?>
+						array('data' => 
+							array(
+								'parcela' => 'js:$("#pro_car_valor_parcela").val()', 
+								'financiado' => 'js:$("#pro_car_valor").val()',
+								'prestacoes' => 'js:$("#pro_car_qtde_prestacoes").val()',
+								'pagas' => 'js:$("#pro_car_qtde_prestacoes_pagas").val()', 
+							),
+							'update' => '#simulacao', 
+						)
+					); ?>
 		</div>
 </td>
 	<td width="50%">
 		<div id="simulacao">
-		
+	<?php
+		echo '<h4>Simulação</h4>';
+		echo '<div class="row">';
+			echo CHtml::activeLabelEx($model,'pro_car_entrada');
+			echo CHtml::activeTextField($model,'pro_car_entrada',array('size' => 20, 'id' => 'pro_car_entrada'));
+			echo CHtml::error($model,'pro_car_entrada');
+		echo '</div>';
+		echo '<div class="row">';
+			echo CHtml::activeLabelEx($model,'pro_car_mensalidade');
+			echo CHtml::activeTextField($model,'pro_car_mensalidade',array('size' => 20, 'id' => 'pro_car_mensalidade'));
+			echo CHtml::error($model,'pro_car_mensalidade');
+		echo '</div>';
+		echo '<div class="row">';
+			echo CHtml::activeLabelEx($model,'pro_car_valor_juizo');
+			echo CHtml::activeTextField($model,'pro_car_valor_juizo',array('size' => 20, 'id' => 'pro_car_valor_juizo'));
+			echo CHtml::error($model,'pro_car_valor_juizo');
+		echo '</div>';
+		echo '<div class="row">';
+			echo CHtml::activeLabelEx($model,'pro_car_economia');
+			echo CHtml::activeTextField($model,'pro_car_economia',array('size' => 20, 'id' => 'pro_car_economia'));
+			echo CHtml::error($model,'pro_car_economia');
+		echo '</div>';
+		echo "<script>
+				$('#simulacao').css('background-color', '#EEE');
+				$('#pro_car_entrada').priceFormat({
+				    prefix: 'R$ ',
+				    centsSeparator: ',',
+				    thousandsSeparator: '.'
+				});
+				$('#pro_car_valor_juizo').priceFormat({
+				    prefix: 'R$ ',
+				    centsSeparator: ',',
+				    thousandsSeparator: '.'
+				});
+				$('#pro_car_mensalidade').priceFormat({
+				    prefix: 'R$ ',
+				    centsSeparator: ',',
+				    thousandsSeparator: '.'
+				});
+				$('#pro_car_economia').priceFormat({
+				    prefix: 'R$ ',
+				    centsSeparator: ',',
+				    thousandsSeparator: '.'
+				});
+			</script>";
+		?>
 		</div>
 	</td></tr></table>
 		
@@ -127,4 +177,6 @@ $('#pro_car_valor_parcela').priceFormat({
     centsSeparator: ',',
     thousandsSeparator: '.'
 });
+$('#pro_car_qtde_prestacoes').numeric();
+$('#pro_car_qtde_prestacoes_pagas').numeric();
 </script>

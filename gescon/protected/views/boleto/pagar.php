@@ -1,4 +1,4 @@
-<h1>Boleto #<?php echo $model->bol_codigo; ?></h1>
+<h1>Boleto Referente ao Processo #<?php echo $model->pro_id; ?></h1>
 <h4>Cliente: <?php echo $model->processo->cliente->cli_nome;?></h4>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
@@ -12,8 +12,8 @@
 			'name' => 'Email do Cliente',
 			'value' => $model->processo->cliente->cli_email
 		),
-		'bol_valor',
-		array('name' => 'bol_vencimento', 'value' => date('d/m/Y', strtotime($model->bol_vencimento))),
+		array('name' => 'bol_valor', 'value' => $model->Moeda($model->bol_valor)),
+		'bol_vencimento',
 		'bol_situacao',
 		'pro_id',
 		array(
