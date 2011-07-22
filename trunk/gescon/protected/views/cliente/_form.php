@@ -15,8 +15,8 @@
 			$criteria = new CDbCriteria();
 			$criteria->order='emp_nome';
 		?>
-		<?php echo CHtml::dropDownList('departamento','departamento',
-											CHtml::listData(Empresa::model()->findAll($criteria), 'emp_id', 'emp_nome'),
+		<?php echo CHtml::dropDownList('empresa','empresa',
+											CHtml::listData(Empresa::model()->ativos()->findAll($criteria), 'emp_id', 'emp_nome'),
                                           	array(
 												'empty'=>'Selecione uma Empresa -->',
 												'ajax' => array(
@@ -146,6 +146,12 @@
 		<?php echo $form->labelEx($model,'cli_situacao'); ?>
 		<?php echo CHtml::activeDropDownList($model, 'cli_situacao', $model->situacaoOptions); ?>
 		<?php echo $form->error($model,'cli_situacao'); ?>
+	</div>
+	
+	<div class="row">
+		<?php if (!$model->update()){echo $form->labelEx($model,'usuario');} ?>
+		<?php if (!$model->update()){echo $form->textField($model,'usuario',array('size'=>45,'maxlength'=>60));} ?>
+		<?php if (!$model->update()){echo $form->error($model,'usuario');} ?>
 	</div>
 
 	<div class="row buttons">

@@ -123,6 +123,17 @@ class Filial extends CActiveRecord
             'I'=>'Inativo',
      	);
      }
+     
+	public function scopes(){
+		return array(
+    		'ativos'=>array(
+          		'condition'=>'fil_ativo = "A"',
+    		),
+			'inativos'=>array(
+          		'condition'=>'fil_ativo = "I"',
+    		),
+		);	
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

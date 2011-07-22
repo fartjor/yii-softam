@@ -90,6 +90,17 @@ class Tipo_processo extends CActiveRecord
             'I'=>'Inativa',
      	);
     }
+    
+	public function scopes(){
+		return array(
+    		'ativos'=>array(
+          		'condition'=>'tpr_situacao = "A"',
+    		),
+			'inativos'=>array(
+          		'condition'=>'tpr_situacao = "I"',
+    		),
+		);	
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

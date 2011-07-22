@@ -198,7 +198,7 @@ class EmpresaController extends Controller
 		$criteria->condition = 'emp_id = ' . $empresa;
 		echo CHtml::tag('option',
                    array('value'=>''),CHtml::encode('Selecione uma Filial -->'),true);
-		$data = Filial::model()->findAll($criteria);
+		$data = Filial::model()->ativos()->findAll($criteria);
  
     	$data = CHtml::listData($data,'fil_id','fil_nome');
     	foreach($data as $value=>$name)

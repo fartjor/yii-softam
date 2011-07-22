@@ -114,7 +114,7 @@ class BoletoController extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
+				$this->redirect(array('gerenciar'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -138,8 +138,10 @@ class BoletoController extends Controller
 		if(isset($_GET['Boleto']))
 			$model->attributes=$_GET['Boleto'];
 			$model->pro_id = $_GET["processo"];
+			
+		$cliente = Cliente::model()->findByAttributes(array('usu_id' => Yii::app()->user->getState('id')));
 		if ((Yii::app()->user->getState('funcao') == 1))
-			if ($model->processo->cli_id == Yii::app()->user->getState('id'))
+			if ($model->processo->cli_id == $cliente->cli_id)
 				$this->render('gerenciar',array(
 					'model'=>$model,
 				));

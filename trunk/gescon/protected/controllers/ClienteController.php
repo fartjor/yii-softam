@@ -58,6 +58,7 @@ class ClienteController extends Controller
 	public function actionNovo()
 	{
 		$model=new Cliente;
+		$modelUsuario = new Usuario;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -66,10 +67,19 @@ class ClienteController extends Controller
 		{
 			$model->attributes=$_POST['Cliente'];
 			$model->cli_data_cadastro = date('Y-m-d H:i:s');
-			if($model->save())
-				$this->redirect(array('visualizar','id'=>$model->cli_id));
+			
+			$modelUsuario->usu_login = $_POST['Cliente']['usuario'];
+			$modelUsuario->usu_email = $_POST['Cliente']['cli_email'];
+			$modelUsuario->usu_senha = md5($_POST['Cliente']['usuario']);
+			$modelUsuario->usu_nome = $_POST['Cliente']['cli_nome'];
+			$modelUsuario->fun_id = 1;
+			if($modelUsuario->save()){
+				$model->usu_id = $modelUsuario->usu_id;
+				if($model->save())
+					$this->redirect(array('visualizar','id'=>$model->cli_id));
+			}
 		}
-
+		$empresa ='';
 		$this->render('novo',array(
 			'model'=>$model,
 		));
@@ -82,7 +92,9 @@ class ClienteController extends Controller
 	public function actionAtualizar()
 	{
 		$model=$this->loadModel();
-
+		$filial = Filial::model()->findByPk($model->fil_id);
+		$empresa = $filial->emp_id;
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -90,6 +102,7 @@ class ClienteController extends Controller
 		{
 			$model->attributes=$_POST['Cliente'];
 			$model->cli_data_modificacao = date('Y-m-d H:i:s');
+			$model->usuario = 'usuario';
 			if($model->save())
 				$this->redirect(array('visualizar','id'=>$model->cli_id));
 		}

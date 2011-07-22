@@ -133,6 +133,10 @@ class Boleto extends CActiveRecord
 		return $valor;
 	}
 	
+	public function Moeda($valor){
+		return 'R$ '. number_format($valor, 2, ',' , '.');
+	}
+	
 	public function dataBR($data){
 		return implode("/",array_reverse(explode("-",$data)));	
 	}
