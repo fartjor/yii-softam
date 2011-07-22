@@ -154,7 +154,7 @@ class CAccessControlFilter extends CFilter
 		if($user->getIsGuest())
 			$user->loginRequired();
 		else
-			throw new CHttpException(403,$message);
+			throw new CHttpException(403,'Voce nao possui permissao para acessar esta pagina');
 	}
 }
 
