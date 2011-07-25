@@ -149,9 +149,9 @@
 	</div>
 	
 	<div class="row">
-		<?php if (!$model->update()){echo $form->labelEx($model,'usuario');} ?>
-		<?php if (!$model->update()){echo $form->textField($model,'usuario',array('size'=>45,'maxlength'=>60));} ?>
-		<?php if (!$model->update()){echo $form->error($model,'usuario');} ?>
+		<?php if ($model->isNewRecord){echo $form->labelEx($model,'usuario');} ?>
+		<?php if ($model->isNewRecord){echo $form->textField($model,'usuario',array('size'=>45,'maxlength'=>60));} ?>
+		<?php if ($model->isNewRecord){echo $form->error($model,'usuario');} ?>
 	</div>
 
 	<div class="row buttons">

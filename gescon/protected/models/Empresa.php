@@ -60,7 +60,7 @@ class Empresa extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('emp_id, emp_nome, emp_cnpj, emp_data_ingresso, emp_site, emp_email, emp_cpf_socio_majoritario, emp_fone1, emp_fone2, emp_uf, emp_cidade, emp_endereco, emp_cep, emp_nome_socio_majoritario', 'safe', 'on'=>'search'),
-			array('emp_email', 'ext.validadores.email'),
+			array('emp_email', 'email'),
 			array('emp_cpf_socio_majoritario', 'ext.validadores.cpf'),
 			array('emp_cnpj', 'ext.validadores.cnpj'),
 		);
